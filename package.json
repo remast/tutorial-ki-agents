@@ -1,0 +1,27 @@
+{
+  "name": "talks.reveal",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync -f . --port 6060 --no-notify",
+    "start": "node index.js",
+    "copy": "copyfiles ./node_modules/reveal.js/dist/reset.css ./node_modules/reveal.js/dist/reveal.css ./node_modules/reveal.js/dist/reveal.js ./node_modules/reveal.js/plugin/notes/notes.js ./node_modules/reveal.js/plugin/markdown/markdown.js ./node_modules/reveal.js/plugin/highlight/highlight.js ./node_modules/reveal.js/plugin/zoom/zoom.js ./node_modules/reveal-plantuml/dist/reveal-plantuml.min.js assets/",
+    "tailwind:build": "tailwindcss -i ./src/tailwind.input.css -o ./assets/tailwind.min.css",
+    "tailwind:dev": "tailwindcss -i ./src/tailwind.input.css -o ./assets/tailwind.min.css --watch",
+     "build": "parcel build index.html --dist-dir dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "reveal-plantuml": "^1.0.2",
+    "reveal-run-in-terminal": "^1.0.5",
+    "reveal.js": "^5.0.5"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "copyfiles": "^2.4.1",
+    "tailwindcss": "^3.4.1"
+  }
+}

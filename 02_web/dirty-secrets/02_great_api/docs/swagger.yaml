@@ -1,0 +1,47 @@
+basePath: /api
+definitions:
+  main.DirtySecret:
+    properties:
+      id:
+        example: id-123
+        maxLength: 10
+        minLength: 4
+        type: string
+      name:
+        example: Frank
+        type: string
+      secret:
+        example: Has alcohol problems.
+        type: string
+    required:
+    - name
+    - secret
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Jan Stamer
+    url: https://www.crossnative.com
+  description: Keeps track of dirty secrets
+  title: Dirty Secrets API
+  version: "1.0"
+paths:
+  /api/dirty-secrets:
+    get:
+      description: Get's all known dirty secrets
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.DirtySecret'
+            type: array
+      summary: List dirty secrets
+      tags:
+      - dirty-secrets
+swagger: "2.0"
+tags:
+- description: Dirty Secrets
+  name: dirty-secrets

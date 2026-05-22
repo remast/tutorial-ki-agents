@@ -1,0 +1,70 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Keeps track of dirty secrets",
+        "title": "Dirty Secrets API",
+        "contact": {
+            "name": "Jan Stamer",
+            "url": "https://www.crossnative.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "paths": {
+        "/api/dirty-secrets": {
+            "get": {
+                "description": "Get's all known dirty secrets",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dirty-secrets"
+                ],
+                "summary": "List dirty secrets",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/main.DirtySecret"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.DirtySecret": {
+            "type": "object",
+            "required": [
+                "name",
+                "secret"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "minLength": 4,
+                    "example": "id-123"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Frank"
+                },
+                "secret": {
+                    "type": "string",
+                    "example": "Has alcohol problems."
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "description": "Dirty Secrets",
+            "name": "dirty-secrets"
+        }
+    ]
+}
