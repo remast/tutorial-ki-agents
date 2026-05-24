@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>Go in der Praxis | Jan Stamer</title>
+  <title>Mit KI und Agenten Entwickeln | Jan Stamer</title>
 
   <link rel="stylesheet" href="./assets/node_modules/reveal.js/dist/reset.css">
   <link rel="stylesheet" href="./assets/node_modules/reveal.js/dist/reveal.css">
@@ -24,85 +24,46 @@
     <div class="slides">
       <section data-background-image="./themes/Pattern-11-outline.svg" data-background-size="800px"
         data-background-repeat="repeat" data-background-opacity=".15">
-        <h1>Go CLI Apps Tutorial</h1>
+        <h1>Mit KI und Agenten Entwickeln</h1>
       </section>
       <section>
-        <section data-background-image="./themes/github-cli-cover.png">
-          <aside class="notes">
-            <ul>
-              <li>2013 begann eine Truppe um Solomon Hykes die Welt der Linux Container zu revolutionieren
-              </li>
-              <li>Mit Python und LXC wurde die erste Version von Docker entwickelt.</li>
-              <li>2014 mit Docker 0.9 stellte Docker von LXC auf libcontainer um, libcontainer wurde in Go
-                neu entwickelt.</li>
-            </ul>
-          </aside>
-        </section>
         <section>
-          <h1 class="cross-yellow"><code style="font-size: 110%;">gh</code> Github CLI</h1>
-          <h1>149.298 <span style="font-size: 50%;">Zeilen Code</span></h1>
-          <h1>490 <span style="font-size: 50%;">Contributors</span></h1>
-        </section>
-        <!--
-        <section>
-          <img src="./themes/Go-Logo_White.png" width="60%" style="margin: auto;" />
-        </section>
-        -->
-        <section>
-          <h2>Kommandozeile 🖥️ + Go = ❤️</h2>
-        </section>
-        <section>
-          <h2>5 Fakten zu Go</h2>
-          <div class="grid grid-cols-12 gap-1 items-center">
-            <div class="col-span-9">
-              <ol>
-                <li class="fragment">statisches Typsystem</li>
-                <li class="fragment">Garbage Collection</li>
-                <li class="fragment">keine Vererbung</li>
-                <li class="fragment">Concurrency eingebaut</li>
-                <li class="fragment">native Ausführung <br /> <span
-                    style="position: relative;padding-left: .1em; top: -1.3em;font-size: 60%; font-size: 60%;">Linux,
-                    Win, z/OS, 386, amd64, ARM, wasm, ...</span></li>
-              </ol>
-            </div>
-            <div class="col-span-3">
-              <img src="./themes/gopher.svg" />
-            </div>
-          </div>
-        </section>
-        <section data-background-image="./themes/unix_prog_env.jpg" data-background-size="40%">
-        </section>
-        <section>
-          <h2>Die Unix Philosophie</h2>
+          <h2>Die 3 Stufen des KI Coding</h2>
           <ol>
-            <li class="fragment">Schreibe Programme die eine Sache tun, und tue sie gut.</li>
-            <li class="fragment">Schreibe Programme die zusammenarbeiten.</li>
-            <li class="fragment">Schreibe Programme die Text Streams verarbeiten denn das ist ein universelles Interface.</li>
+            <li class="fragment"><b>Chat GPT</b> <br /> KI-Tools erzeugen Code-Schnipsel</li>
+            <li class="fragment"><b>Code Chat</b> <br /> Chat Konversation mit KI über das Projekt</li>
+            <li class="fragment"><b>KI-Agenten</b> <br /> Entwicklungs Aufgaben an eigenständige KI-Agenten delegieren
+            </li>
           </ol>
         </section>
         <section>
-          <h2>Berühmte Unix Tools</h2>
-          <ul>
-            <li class="fragment">Curl <pre>curl -v http://www.entwickler.de</pre></li>
-            <li class="fragment">Cat + Grep <pre>cat main.go | grep "go"</pre></li>
-          </ul>
-        </section>
-        <section>
-          <h2>Entwicklung</h2>
-          <div class="grid grid-cols-3 gap-32 items-center">
-            <div class="col-span-1 fragment">
-              <img src="./themes/goland_logo_300x300.png" />
-              JetBrains GoLand
+          <h2>Mit KI-Agenten entwickeln</h2>
+          <div class="grid grid-cols-12 gap-1 items-center">
+            <div class="col-span-8">
+              <img src="./themes/ai_dev_agent.png" />
             </div>
-            <div class="col-span-1 fragment">
-              <img src="./themes/Visual_Studio_Code_1.35_icon.svg" />
-              Visual Studio Code
-            </div>
-            <div class="col-span-1 fragment">
-              <img src="./themes/Vimlogo.svg" />
-              Vim Go
+            <div class="col-span-4" style="font-size: 75%;">
+              <ul>
+                <li class="fragment">handelt eigenständig</li>
+                <li class="fragment">nutzt Werkzeuge</li>
+              </ul>
             </div>
           </div>
+        </section>
+        <section>
+          <h2>Der Agentic Loop</h2>
+          <img src="./themes/agentischer_loop.png" />
+        </section>
+        <section>
+          <h2>Dein KI-Agent im Terminal</h2>
+          <ul>
+            <li>Terminal-Tools wie Claude Code oder Opencode machen KI-Agenten aus KI-Modell</li>
+            <li>KI-Modell als kreativer Kopf oder Komponist</li>
+            <li>Werkzeuge (Shell, MCP, ...) sind die Instrumente</li>
+            <li>Terminal Tool als Dirigent der koordiniert und Takt vorgibt</li>
+          </ul>
+        </section>
+        <section data-background-iframe="https://opencode.ai/" >
         </section>
       </section>
       </section>
@@ -169,7 +130,7 @@
       </section>
       <section>
         <section>
-          <h1>🖥️ CLI Tool <br/> Go Proverbs</h1>
+          <h1>🖥️ CLI Tool <br /> Go Proverbs</h1>
         </section>
         <section>
           <h2>CLI Proverbs </h2>
@@ -436,29 +397,35 @@
         <section>
           <h2>Concurrency</h2>
           <div class="grid grid-cols-2 gap-1 text-left" style="font-size: 0.8em;">
-              <div class="fragment" style="color: #FFC800;">
-                  <h4 style="color: inherit; font-size: 1em;">Goroutine</h4>
-                  leichtgewichtiger Thread
-                  <ol></ol>
-              </div>
-              <div class="fragment" style="color: #00C8FF;">
-                  <h4 style="color: inherit;">Channel</h4>
-                  Kanal für Nachrichten, dient der
+            <div class="fragment" style="color: #FFC800;">
+              <h4 style="color: inherit; font-size: 1em;">Goroutine</h4>
+              leichtgewichtiger Thread
+              <ol></ol>
+            </div>
+            <div class="fragment" style="color: #00C8FF;">
+              <h4 style="color: inherit;">Channel</h4>
+              Kanal für Nachrichten, dient der
 
-                  <p style="margin-left: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#00f2f7" class="bi bi-chat-fill" viewBox="0 0 16 16" style="display: inline; margin-right: 30px;">
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
-                    </svg>Kommunkation</p>
+              <p style="margin-left: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                  fill="#00f2f7" class="bi bi-chat-fill" viewBox="0 0 16 16"
+                  style="display: inline; margin-right: 30px;">
+                  <path
+                    d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
+                </svg>Kommunkation</p>
 
-                    <p style="margin-left: 35px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#00f2f7" class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="display: inline; margin-right: 20px;">
-                          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
-                        </svg> 
-                        Synchronisation</p>
+              <p style="margin-left: 35px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#00f2f7"
+                  class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="display: inline; margin-right: 20px;">
+                  <path fill-rule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
+                </svg>
+                Synchronisation
+              </p>
 
-                  von Goroutinen
-              </div>
+              von Goroutinen
+            </div>
           </div>
-      </section>
+        </section>
 
         <section>
           <h2>File Downloader <span style="font-size: 50%;">1/3</span></h2>
