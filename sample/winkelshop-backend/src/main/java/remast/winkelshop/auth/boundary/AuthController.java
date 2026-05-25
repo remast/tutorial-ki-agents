@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.order.boundary.DataResponse;
 import remast.winkelshop.auth.control.AuthService;
-import remast.winkelshop.auth.entity.UserRecord;
+import remast.winkelshop.auth.entity.UserEntity;
 
 @RestController
 @RequestMapping("/auth")
@@ -52,6 +52,6 @@ public class AuthController {
     public record LoginRequest(@NotBlank @Email String email, @NotBlank String password) {
     }
 
-    public record LoginResponse(String accessToken, String tokenType, long expiresIn, UserRecord user) {
+    public record LoginResponse(String accessToken, String tokenType, long expiresIn, UserEntity user) {
     }
 }

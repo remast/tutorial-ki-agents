@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import remast.winkelshop.auth.boundary.User;
 import remast.winkelshop.auth.entity.UserRepository;
-import remast.winkelshop.auth.entity.UserRecord;
+import remast.winkelshop.auth.entity.UserEntity;
 
 import java.util.Optional;
 
@@ -34,6 +34,6 @@ public class AuthService {
         return tokenStore.resolve(token);
     }
 
-    public record LoginResult(String accessToken, UserRecord user) {
+    public record LoginResult(String accessToken, UserEntity user) {
     }
 }
