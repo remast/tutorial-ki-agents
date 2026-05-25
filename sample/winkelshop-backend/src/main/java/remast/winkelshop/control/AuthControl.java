@@ -3,7 +3,6 @@ package remast.winkelshop.control;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import remast.winkelshop.entity.UserRepository;
-import remast.winkelshop.entity.UserAccount;
 import remast.winkelshop.entity.UserRecord;
 import remast.winkelshop.security.AuthenticatedUser;
 
@@ -24,7 +23,7 @@ public class AuthControl {
                 .orElseThrow();
 
         String token = tokenStore.issue(new AuthenticatedUser(user.id(), user.role()));
-        return new LoginResult(token, new UserAccount(user.id(), user.name(), user.email(), user.password(), user.role()));
+        return new LoginResult(token, user);
     }
 
     public void logout(String token) {
@@ -35,6 +34,6 @@ public class AuthControl {
         return tokenStore.resolve(token);
     }
 
-    public record LoginResult(String accessToken, UserAccount user) {
+    public record LoginResult(String accessToken, UserRecord user) {
     }
 }

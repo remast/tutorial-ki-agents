@@ -2,12 +2,10 @@ package remast.winkelshop.control;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import remast.winkelshop.entity.CartItemRepository;
-import remast.winkelshop.entity.ProductRepository;
-import remast.winkelshop.entity.Cart;
-import remast.winkelshop.entity.CartItem;
 import remast.winkelshop.entity.CartItemEntity;
+import remast.winkelshop.entity.CartItemRepository;
 import remast.winkelshop.entity.Currency;
+import remast.winkelshop.entity.ProductRepository;
 
 import java.time.Instant;
 import java.util.List;
@@ -20,7 +18,7 @@ public class CartControl {
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
 
-    public CartItem addItem(String userId, String productId, int quantity) {
+    public CartItemEntity addItem(String userId, String productId, int quantity) {
         var product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("product not found"));
         if (!product.inStock()) {
@@ -36,7 +34,7 @@ public class CartControl {
                 product.price(),
                 Instant.now()
         ));
-        return toCartItem(saved);
+        return saved;
     }
 
     public CartView getCart(String userId) {
@@ -52,7 +50,7 @@ public class CartControl {
         return new CartView(lines, subtotal, Currency.GALLEON);
     }
 
-    public CartItem updateItemQuantity(String userId, String itemId, int quantity) {
+    public CartItemEntity updateItemQuantity(String userId, String itemId, int quantity) {
         CartItemEntity existing = cartItemRepository.findByUserIdAndItemId(userId, itemId)
                 .orElseThrow();
         CartItemEntity updated = cartItemRepository.save(new CartItemEntity(
@@ -64,7 +62,7 @@ public class CartControl {
                 existing.unitPrice(),
                 existing.createdAt()
         ));
-        return toCartItem(updated);
+        return updated;
     }
 
     public void removeItem(String userId, String itemId) {
@@ -73,16 +71,10 @@ public class CartControl {
         cartItemRepository.delete(existing);
     }
 
-    public Cart consumeCart(String userId) {
+    public List<CartItemEntity> consumeCart(String userId) {
         List<CartItemEntity> items = cartItemRepository.findByUserIdOrderByCreatedAtAsc(userId);
-        Cart cart = new Cart(userId);
-        cart.getItems().addAll(items.stream().map(this::toCartItem).toList());
         cartItemRepository.deleteAllByUserId(userId);
-        return cart;
-    }
-
-    private CartItem toCartItem(CartItemEntity record) {
-        return new CartItem(record.itemId(), record.productId(), record.quantity(), record.unitPrice());
+        return items;
     }
 
     public record CartView(List<CartLine> items, double subtotal, Currency currency) {

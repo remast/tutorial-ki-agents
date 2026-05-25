@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.DataResponse;
 import remast.winkelshop.common.PagedResponse;
 import remast.winkelshop.control.OrderControl;
-import remast.winkelshop.entity.Order;
+import remast.winkelshop.entity.OrderEntity;
 import remast.winkelshop.security.AuthenticatedUser;
 
 import java.time.Instant;
@@ -23,7 +23,7 @@ public class OrderController {
     private final OrderControl orderControl;
 
     @GetMapping("/{orderId}")
-    public DataResponse<Order> getOrder(Authentication authentication, @PathVariable String orderId) {
+    public DataResponse<OrderControl.OrderDetails> getOrder(Authentication authentication, @PathVariable String orderId) {
         String userId = ((AuthenticatedUser) authentication.getPrincipal()).userId();
         return new DataResponse<>(orderControl.getOrder(userId, orderId));
     }
@@ -35,10 +35,10 @@ public class OrderController {
         String userId = ((AuthenticatedUser) authentication.getPrincipal()).userId();
         return orderControl.getOrders(userId, page, size)
                 .map(order -> new OrderHistoryItem(
-                        order.orderId(),
+                        order.id(),
                         order.status(),
                         order.total(),
-                        order.currency().name(),
+                        order.currency(),
                         order.createdAt()
                 ));
     }

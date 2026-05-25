@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.DataResponse;
 import remast.winkelshop.common.PagedResponse;
 import remast.winkelshop.control.ProductControl;
-import remast.winkelshop.entity.Product;
+import remast.winkelshop.entity.ProductEntity;
 
 @RestController
 @RequestMapping("/products")
@@ -33,14 +33,14 @@ public class ProductController {
                         product.id(),
                         product.name(),
                         product.price(),
-                        product.currency().name(),
+                        product.currency(),
                         product.inStock(),
                         product.categoryId()
                 ));
     }
 
     @GetMapping("/{productId}")
-    public DataResponse<Product> getProduct(@PathVariable String productId) {
+    public DataResponse<ProductEntity> getProduct(@PathVariable String productId) {
         return new DataResponse<>(productControl.getProduct(productId));
     }
 

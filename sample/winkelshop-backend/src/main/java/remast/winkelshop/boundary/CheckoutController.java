@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.DataResponse;
 import remast.winkelshop.control.CheckoutControl;
-import remast.winkelshop.entity.Order;
-import remast.winkelshop.entity.ShippingAddress;
 import remast.winkelshop.security.AuthenticatedUser;
-
-import java.time.Instant;
 
 @RestController
 @RequestMapping("/checkout")
@@ -27,19 +23,20 @@ public class CheckoutController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse<CheckoutResponse> checkout(Authentication authentication,
-                                                   @Valid @RequestBody CheckoutRequest request) {
+    public DataResponse<CheckoutControl.CheckoutResult> checkout(Authentication authentication,
+                                                                 @Valid @RequestBody CheckoutRequest request) {
         String userId = ((AuthenticatedUser) authentication.getPrincipal()).userId();
         ShippingAddressRequest shippingAddress = request.shippingAddress();
-        ShippingAddress address = new ShippingAddress(
+        CheckoutControl.CheckoutResult result = checkoutControl.checkout(
+                userId,
+                request.paymentMethod(),
                 shippingAddress.fullName(),
                 shippingAddress.street(),
                 shippingAddress.city(),
                 shippingAddress.postalCode(),
                 shippingAddress.country()
         );
-        Order order = checkoutControl.checkout(userId, address, request.paymentMethod());
-        return new DataResponse<>(new CheckoutResponse(order.orderId(), order.status(), order.total(), order.currency().name(), order.createdAt()));
+        return new DataResponse<>(result);
     }
 
     public record CheckoutRequest(@Valid ShippingAddressRequest shippingAddress, @NotBlank String paymentMethod) {
@@ -52,8 +49,5 @@ public class CheckoutController {
             @NotBlank String postalCode,
             @NotBlank String country
     ) {
-    }
-
-    public record CheckoutResponse(String orderId, String status, double total, String currency, Instant placedAt) {
     }
 }

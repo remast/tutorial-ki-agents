@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.CategoryListResponse;
 import remast.winkelshop.control.CategoryControl;
-import remast.winkelshop.entity.Category;
+import remast.winkelshop.entity.CategoryEntity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class CategoryController {
 
     @GetMapping
     public CategoryListResponse getCategories() {
-        List<Category> categories = categoryControl.getAllCategories();
+        List<CategoryEntity> categories = categoryControl.getAllCategories();
         return new CategoryListResponse(categories, new CategoryListResponse.Meta(categories.size()));
     }
 }

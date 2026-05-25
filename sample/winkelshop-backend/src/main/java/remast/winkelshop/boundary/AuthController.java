@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.DataResponse;
 import remast.winkelshop.control.AuthControl;
+import remast.winkelshop.entity.UserRecord;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,7 +31,7 @@ public class AuthController {
                         result.accessToken(),
                         "Bearer",
                         AuthControl.TOKEN_EXPIRES_IN_SECONDS,
-                        new AuthUserView(result.user().id(), result.user().name(), result.user().role())
+                        result.user()
                 )
         );
     }
@@ -51,9 +52,6 @@ public class AuthController {
     public record LoginRequest(@NotBlank @Email String email, @NotBlank String password) {
     }
 
-    public record LoginResponse(String accessToken, String tokenType, long expiresIn, AuthUserView user) {
-    }
-
-    public record AuthUserView(String id, String name, String role) {
+    public record LoginResponse(String accessToken, String tokenType, long expiresIn, UserRecord user) {
     }
 }

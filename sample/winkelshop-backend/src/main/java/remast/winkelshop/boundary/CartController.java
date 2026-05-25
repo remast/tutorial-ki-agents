@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.common.DataResponse;
 import remast.winkelshop.control.CartControl;
-import remast.winkelshop.entity.CartItem;
+import remast.winkelshop.entity.CartItemEntity;
 import remast.winkelshop.security.AuthenticatedUser;
 
 @RestController
@@ -29,18 +29,10 @@ public class CartController {
 
     @PostMapping("/items")
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse<AddCartItemResponse> addItem(Authentication authentication,
-                                                     @Valid @RequestBody AddCartItemRequest request) {
-        CartItem item = cartControl.addItem(getUser(authentication), request.productId(), request.quantity());
-        return new DataResponse<>(
-                new AddCartItemResponse(
-                        item.getItemId(),
-                        item.getProductId(),
-                        item.getQuantity(),
-                        item.getUnitPrice(),
-                        item.getLineTotal()
-                )
-        );
+    public DataResponse<CartItemEntity> addItem(Authentication authentication,
+                                                @Valid @RequestBody AddCartItemRequest request) {
+        CartItemEntity item = cartControl.addItem(getUser(authentication), request.productId(), request.quantity());
+        return new DataResponse<>(item);
     }
 
     @GetMapping
@@ -49,11 +41,11 @@ public class CartController {
     }
 
     @PatchMapping("/items/{itemId}")
-    public DataResponse<UpdateCartItemResponse> updateItem(Authentication authentication,
-                                                           @PathVariable String itemId,
-                                                           @Valid @RequestBody UpdateCartItemRequest request) {
-        CartItem item = cartControl.updateItemQuantity(getUser(authentication), itemId, request.quantity());
-        return new DataResponse<>(new UpdateCartItemResponse(item.getItemId(), item.getQuantity(), item.getUnitPrice(), item.getLineTotal()));
+    public DataResponse<CartItemEntity> updateItem(Authentication authentication,
+                                                   @PathVariable String itemId,
+                                                   @Valid @RequestBody UpdateCartItemRequest request) {
+        CartItemEntity item = cartControl.updateItemQuantity(getUser(authentication), itemId, request.quantity());
+        return new DataResponse<>(item);
     }
 
     @DeleteMapping("/items/{itemId}")
@@ -72,9 +64,4 @@ public class CartController {
     public record UpdateCartItemRequest(@Min(1) int quantity) {
     }
 
-    public record AddCartItemResponse(String itemId, String productId, int quantity, double unitPrice, double lineTotal) {
-    }
-
-    public record UpdateCartItemResponse(String itemId, int quantity, double unitPrice, double lineTotal) {
-    }
 }
