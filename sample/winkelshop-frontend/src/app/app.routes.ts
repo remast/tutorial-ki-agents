@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { guestOnlyGuard } from './auth/auth.guard';
+import { authGuard, guestOnlyGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +16,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./winkelshop/winkelshop-page').then(
         (module) => module.WinkelshopPage
+      )
+  },
+  {
+    path: 'checkout',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./checkout/checkout-page').then(
+        (module) => module.CheckoutPage
       )
   },
   {

@@ -11,6 +11,7 @@
         <div class="account-pill" aria-label="Angemeldetes Konto">
           <p class="account-name">{{ user.name }}</p>
           <p class="account-email">{{ user.email }}</p>
+          <a class="checkout-link" routerLink="/checkout">Zum Checkout</a>
           <button type="button" class="logout-button" (click)="logout()">Logout</button>
         </div>
       } @else {

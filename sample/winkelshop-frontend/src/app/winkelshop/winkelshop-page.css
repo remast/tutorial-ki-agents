@@ -91,6 +91,28 @@ h1 {
   cursor: pointer;
 }
 
+.checkout-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  margin-right: 0.45rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.42rem 0.65rem;
+}
+
+.checkout-link:hover {
+  background: #074d5c;
+}
+
+.checkout-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, white 55%);
+  outline-offset: 2px;
+}
+
 .logout-button:hover {
   background: color-mix(in srgb, var(--accent-soft) 75%, white 25%);
 }
