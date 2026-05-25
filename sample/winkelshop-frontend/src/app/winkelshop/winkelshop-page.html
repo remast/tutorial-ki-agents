@@ -1,8 +1,26 @@
 <main class="winkelshop-shell" aria-labelledby="winkelshop-title">
   <header class="winkelshop-header">
-    <p class="shop-kicker">Readonly Demo</p>
-    <h1 id="winkelshop-title">Winkelshop</h1>
-    <p class="shop-subline">Stoebere durch Kategorien und entdecke magische Produkte.</p>
+    <div class="header-row">
+      <div>
+        <p class="shop-kicker">Readonly Demo</p>
+        <h1 id="winkelshop-title">Winkelshop</h1>
+        <p class="shop-subline">Stoebere durch Kategorien und entdecke magische Produkte.</p>
+      </div>
+
+      @if (currentUser(); as user) {
+        <div class="account-pill" aria-label="Angemeldetes Konto">
+          <p class="account-name">{{ user.name }}</p>
+          <p class="account-email">{{ user.email }}</p>
+          <button type="button" class="logout-button" (click)="logout()">Logout</button>
+        </div>
+      } @else {
+        <div class="account-pill" aria-label="Nicht angemeldet">
+          <p class="account-name">Gastmodus</p>
+          <p class="account-email">Produkte ansehen ohne Anmeldung.</p>
+          <a class="login-link" routerLink="/login">Zum Login</a>
+        </div>
+      }
+    </div>
   </header>
 
   @if (combinedErrorMessage(); as errorMessage) {
@@ -66,10 +84,22 @@
                     }
                   </p>
                 </div>
+                <button
+                  type="button"
+                  class="add-to-cart-button"
+                  [disabled]="!product.inStock"
+                  (click)="addToCart(product.id)"
+                >
+                  In den Warenkorb
+                </button>
               </div>
             </li>
           }
         </ul>
+
+        @if (cartMessage(); as message) {
+          <p class="cart-message" aria-live="polite">{{ message }}</p>
+        }
       } @else {
         <div class="message-card" aria-live="polite">
           <h3>Keine Produkte gefunden</h3>

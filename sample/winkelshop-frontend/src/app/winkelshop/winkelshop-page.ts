@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { catchError, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
 
+import { AuthApiService } from '../auth/auth-api.service';
+import { AuthStateService } from '../auth/auth-state.service';
 import {
   WinkelshopApiService,
   type Category,
@@ -17,16 +20,25 @@ const EMPTY_CATEGORIES_RESPONSE: CategoriesResponse = {
 
 @Component({
   selector: 'app-winkelshop-page',
+  imports: [RouterLink],
   templateUrl: './winkelshop-page.html',
   styleUrl: './winkelshop-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WinkelshopPage {
+  private readonly authApiService = inject(AuthApiService);
+  private readonly authStateService = inject(AuthStateService);
   private readonly winkelshopApiService = inject(WinkelshopApiService);
 
   protected readonly selectedCategoryId = signal<string | null>(null);
   protected readonly categoriesErrorMessage = signal<string | null>(null);
   protected readonly productsErrorMessage = signal<string | null>(null);
+  protected readonly cartMessage = signal<string | null>(null);
+  protected readonly currentUser = this.authStateService.user;
+
+  constructor() {
+    this.authStateService.restoreSession();
+  }
 
   protected readonly categoriesResource = toSignal(
     this.winkelshopApiService.getCategoriesResponse().pipe(
@@ -84,6 +96,26 @@ export class WinkelshopPage {
 
   protected selectCategory(categoryId: string): void {
     this.selectedCategoryId.set(categoryId);
+  }
+
+  protected logout(): void {
+    this.authStateService.logout().subscribe();
+  }
+
+  protected addToCart(productId: string): void {
+    if (!this.authStateService.isAuthenticated()) {
+      this.cartMessage.set('Bitte melde dich an, um Artikel in den Warenkorb zu legen.');
+      return;
+    }
+
+    this.authApiService.addCartItem({ productId, quantity: 1 }).subscribe({
+      next: () => {
+        this.cartMessage.set('Artikel wurde in den Warenkorb gelegt.');
+      },
+      error: () => {
+        this.cartMessage.set('Artikel konnte nicht in den Warenkorb gelegt werden.');
+      }
+    });
   }
 
   protected trackByProductId(_index: number, product: Product): string {

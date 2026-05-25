@@ -28,6 +28,14 @@
   margin: 0 auto 1.5rem;
 }
 
+.header-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
 .shop-kicker {
   margin: 0;
   color: var(--accent);
@@ -46,6 +54,67 @@ h1 {
   margin: 0;
   font-size: 1.05rem;
   color: var(--ink-muted);
+}
+
+.account-pill {
+  min-width: 16rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--paper) 88%, white 12%);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 5%);
+  padding: 0.65rem 0.75rem;
+}
+
+.account-name,
+.account-email {
+  margin: 0;
+}
+
+.account-name {
+  font-weight: 700;
+}
+
+.account-email {
+  margin-top: 0.15rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.logout-button {
+  margin-top: 0.6rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0.42rem 0.65rem;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: color-mix(in srgb, var(--accent-soft) 75%, white 25%);
+}
+
+.logout-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, white 55%);
+  outline-offset: 2px;
+}
+
+.login-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.42rem 0.65rem;
+}
+
+.login-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, white 55%);
+  outline-offset: 2px;
 }
 
 .winkelshop-layout {
@@ -195,6 +264,40 @@ h1 {
 
 .product-stock.unavailable {
   color: var(--warning);
+}
+
+.add-to-cart-button {
+  margin-top: 0.7rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.55rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent-soft) 76%, white 24%);
+}
+
+.add-to-cart-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.add-to-cart-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, white 55%);
+  outline-offset: 2px;
+}
+
+.cart-message {
+  margin: 0.9rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  padding: 0.55rem 0.72rem;
+  color: var(--ink-muted);
+  background: #ffffff;
 }
 
 .message-card {
