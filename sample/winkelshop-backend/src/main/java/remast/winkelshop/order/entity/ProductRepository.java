@@ -15,7 +15,7 @@ public interface ProductRepository extends Repository<ProductEntity, UUID> {
     @Query("""
             SELECT * FROM products
             WHERE (:search IS NULL OR :search = '' OR lower(name) LIKE lower(concat('%', :search, '%')))
-              AND (:category IS NULL OR :category = '' OR category_id = :category)
+              AND (:category IS NULL OR category_id = :category)
               AND (:minPrice IS NULL OR price >= :minPrice)
               AND (:maxPrice IS NULL OR price <= :maxPrice)
               AND (:inStock IS NULL OR in_stock = :inStock)
@@ -33,7 +33,7 @@ public interface ProductRepository extends Repository<ProductEntity, UUID> {
     @Query("""
             SELECT count(*) FROM products
             WHERE (:search IS NULL OR :search = '' OR lower(name) LIKE lower(concat('%', :search, '%')))
-              AND (:category IS NULL OR :category = '' OR category_id = :category)
+              AND (:category IS NULL OR category_id = :category)
               AND (:minPrice IS NULL OR price >= :minPrice)
               AND (:maxPrice IS NULL OR price <= :maxPrice)
               AND (:inStock IS NULL OR in_stock = :inStock)

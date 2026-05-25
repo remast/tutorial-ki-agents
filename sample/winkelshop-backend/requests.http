@@ -2,6 +2,10 @@
 
 GET http://localhost:8080/categories
 
+### Get Products
+
+GET http://localhost:8080/products?category=11111111-1111-1111-1111-111111111112
+
 ### Get Cart
 
 GET http://localhost:8080/cart

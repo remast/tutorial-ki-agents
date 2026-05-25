@@ -15,9 +15,7 @@ public record PagedResponse<T>(
         int size,
         int number,
         SortDetails sort,
-        boolean first,
-        int numberOfElements,
-        boolean empty
+        int numberOfElements
 ) {
 
     public <R> PagedResponse<R> map(Function<T, R> mapper) {
@@ -30,9 +28,7 @@ public record PagedResponse<T>(
                 .size(size)
                 .number(number)
                 .sort(sort)
-                .first(first)
                 .numberOfElements(numberOfElements)
-                .empty(empty)
                 .build();
     }
 
@@ -54,9 +50,7 @@ public record PagedResponse<T>(
                 .size(safeSize)
                 .number(safePage)
                 .sort(new SortDetails(false, true, true))
-                .first(safePage == 0)
                 .numberOfElements(content.size())
-                .empty(content.isEmpty())
                 .build();
     }
 
@@ -74,9 +68,7 @@ public record PagedResponse<T>(
                 .size(safeSize)
                 .number(safePage)
                 .sort(new SortDetails(false, true, true))
-                .first(safePage == 0)
                 .numberOfElements(content.size())
-                .empty(content.isEmpty())
                 .build();
     }
 
