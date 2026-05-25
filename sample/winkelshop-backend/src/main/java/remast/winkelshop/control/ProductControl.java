@@ -58,6 +58,6 @@ public class ProductControl {
                         record.categoryId(),
                         record.imageUrl()
                 ))
-                .orElseThrow(() -> new NotFoundException("product not found"));
+                .orElseThrow();
     }
 }

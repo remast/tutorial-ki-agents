@@ -16,7 +16,7 @@ public class OrderControl {
 
     public Order getOrder(String userId, String orderId) {
         var order = orderRepository.findByIdAndUserId(orderId, userId)
-                .orElseThrow(() -> new NotFoundException("order not found"));
+                .orElseThrow();
         List<OrderItem> items = orderItemRepository.findByOrderId(order.id()).stream()
                 .map(item -> new OrderItem(item.productId(), item.name(), item.quantity(), item.unitPrice()))
                 .toList();

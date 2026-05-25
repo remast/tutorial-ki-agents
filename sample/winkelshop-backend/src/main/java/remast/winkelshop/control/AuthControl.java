@@ -21,7 +21,7 @@ public class AuthControl {
     public LoginResult login(String email, String password) {
         UserRecord user = userRepository.findByEmail(email)
                 .filter(account -> account.password().equals(password))
-                .orElseThrow(() -> new UnauthorizedException("invalid credentials"));
+                .orElseThrow();
 
         String token = tokenStore.issue(new AuthenticatedUser(user.id(), user.role()));
         return new LoginResult(token, new UserAccount(user.id(), user.name(), user.email(), user.password(), user.role()));

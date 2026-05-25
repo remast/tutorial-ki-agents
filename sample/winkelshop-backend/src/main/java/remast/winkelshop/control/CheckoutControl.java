@@ -26,7 +26,7 @@ public class CheckoutControl {
         List<OrderItem> items = cart.getItems().stream()
                 .map(item -> {
                     ProductEntity product = productRepository.findById(item.getProductId())
-                            .orElseThrow(() -> new NotFoundException("product not found"));
+                            .orElseThrow();
                     products.put(item.getProductId(), product);
                     return new OrderItem(item.getProductId(), product.name(), item.getQuantity(), item.getUnitPrice());
                 })
