@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.order.control.CartService;
+import remast.winkelshop.order.entity.Cart;
 import remast.winkelshop.order.entity.CartItemEntity;
 import remast.winkelshop.auth.boundary.User;
 
@@ -35,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping
-    public DataResponse<CartService.CartView> getCart(User user) {
+    public DataResponse<Cart> getCart(User user) {
         return new DataResponse<>(cartService.getCart(user.userId()));
     }
 

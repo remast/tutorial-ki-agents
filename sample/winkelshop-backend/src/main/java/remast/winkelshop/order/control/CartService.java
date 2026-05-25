@@ -2,6 +2,7 @@ package remast.winkelshop.order.control;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import remast.winkelshop.order.entity.Cart;
 import remast.winkelshop.order.entity.CartItemEntity;
 import remast.winkelshop.order.entity.CartItemRepository;
 import remast.winkelshop.order.entity.Currency;
@@ -36,17 +37,16 @@ public class CartService {
         ));
     }
 
-    public CartView getCart(UUID userId) {
+    public Cart getCart(UUID userId) {
         var lines = cartItemRepository.findByUserIdOrderByCreatedAtAsc(userId).stream()
                 .map(item -> {
                     var product = productRepository.findById(item.productId())
                             .orElseThrow();
-                    return new CartLine(item.itemId(), item.productId(), product.name(), item.quantity(), item.unitPrice());
+                    return new Cart.CartItemLine(item.itemId(), item.productId(), product.name(), item.quantity(), item.unitPrice());
                 })
                 .toList();
 
-        var subtotal = lines.stream().mapToDouble(CartLine::lineTotal).sum();
-        return new CartView(lines, subtotal, Currency.GALLEON);
+        return new Cart(lines, Currency.GALLEON);
     }
 
     public CartItemEntity updateItemQuantity(UUID userId, UUID itemId, int quantity) {
@@ -73,14 +73,5 @@ public class CartService {
         var items = cartItemRepository.findByUserIdOrderByCreatedAtAsc(userId);
         cartItemRepository.deleteAllByUserId(userId);
         return items;
-    }
-
-    public record CartView(List<CartLine> items, double subtotal, Currency currency) {
-    }
-
-    public record CartLine(UUID itemId, UUID productId, String name, int quantity, double unitPrice) {
-        public double lineTotal() {
-            return unitPrice * quantity;
-        }
     }
 }
