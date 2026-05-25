@@ -6,6 +6,8 @@ import remast.winkelshop.order.boundary.PagedResponse;
 import remast.winkelshop.order.entity.ProductEntity;
 import remast.winkelshop.order.entity.ProductRepository;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -13,7 +15,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public PagedResponse<ProductEntity> searchProducts(String search,
-                                                       String category,
+                                                       UUID category,
                                                        Double minPrice,
                                                        Double maxPrice,
                                                        Boolean inStock,
@@ -29,7 +31,7 @@ public class ProductService {
         return PagedResponse.fromContentAndTotal(content, safePage, safeSize, total);
     }
 
-    public ProductEntity getProduct(String productId) {
+    public ProductEntity getProduct(UUID productId) {
         return productRepository.findById(productId)
                 .orElseThrow();
     }

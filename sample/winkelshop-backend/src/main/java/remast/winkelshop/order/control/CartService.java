@@ -18,7 +18,7 @@ public class CartService {
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
 
-    public CartItemEntity addItem(String userId, String productId, int quantity) {
+    public CartItemEntity addItem(UUID userId, UUID productId, int quantity) {
         var product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("product not found"));
         if (!product.inStock()) {
@@ -26,8 +26,8 @@ public class CartService {
         }
 
         var saved = cartItemRepository.save(new CartItemEntity(
-                null,
-                "item_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
                 userId,
                 productId,
                 quantity,
@@ -37,7 +37,7 @@ public class CartService {
         return saved;
     }
 
-    public CartView getCart(String userId) {
+    public CartView getCart(UUID userId) {
         var lines = cartItemRepository.findByUserIdOrderByCreatedAtAsc(userId).stream()
                 .map(item -> {
                     var product = productRepository.findById(item.productId())
@@ -50,7 +50,7 @@ public class CartService {
         return new CartView(lines, subtotal, Currency.GALLEON);
     }
 
-    public CartItemEntity updateItemQuantity(String userId, String itemId, int quantity) {
+    public CartItemEntity updateItemQuantity(UUID userId, UUID itemId, int quantity) {
         var existing = cartItemRepository.findByUserIdAndItemId(userId, itemId)
                 .orElseThrow();
         var updated = cartItemRepository.save(new CartItemEntity(
@@ -65,13 +65,13 @@ public class CartService {
         return updated;
     }
 
-    public void removeItem(String userId, String itemId) {
+    public void removeItem(UUID userId, UUID itemId) {
         var existing = cartItemRepository.findByUserIdAndItemId(userId, itemId)
                 .orElseThrow();
         cartItemRepository.delete(existing);
     }
 
-    public List<CartItemEntity> consumeCart(String userId) {
+    public List<CartItemEntity> consumeCart(UUID userId) {
         var items = cartItemRepository.findByUserIdOrderByCreatedAtAsc(userId);
         cartItemRepository.deleteAllByUserId(userId);
         return items;
@@ -80,7 +80,7 @@ public class CartService {
     public record CartView(List<CartLine> items, double subtotal, Currency currency) {
     }
 
-    public record CartLine(String itemId, String productId, String name, int quantity, double unitPrice) {
+    public record CartLine(UUID itemId, UUID productId, String name, int quantity, double unitPrice) {
         public double lineTotal() {
             return unitPrice * quantity;
         }

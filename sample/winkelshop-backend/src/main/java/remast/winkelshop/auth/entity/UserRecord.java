@@ -4,9 +4,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.UUID;
+
 @Table("users")
 public record UserRecord(
-        @Id String id,
+        @Id UUID id,
         String name,
         String email,
         String password,

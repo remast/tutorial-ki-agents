@@ -6,12 +6,13 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface OrderRepository extends Repository<OrderEntity, String> {
+public interface OrderRepository extends Repository<OrderEntity, UUID> {
 
     OrderEntity save(OrderEntity order);
 
-    Optional<OrderEntity> findByIdAndUserId(String id, String userId);
+    Optional<OrderEntity> findByIdAndUserId(UUID id, UUID userId);
 
     @Query("""
             SELECT * FROM orders
@@ -19,9 +20,9 @@ public interface OrderRepository extends Repository<OrderEntity, String> {
             ORDER BY created_at DESC
             LIMIT :size OFFSET :offset
             """)
-    List<OrderEntity> findPageByUserId(@Param("userId") String userId,
+    List<OrderEntity> findPageByUserId(@Param("userId") UUID userId,
                                        @Param("size") int size,
                                        @Param("offset") long offset);
 
-    long countByUserId(String userId);
+    long countByUserId(UUID userId);
 }

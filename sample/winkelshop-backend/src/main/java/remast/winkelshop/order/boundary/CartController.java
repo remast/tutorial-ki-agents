@@ -2,7 +2,6 @@ package remast.winkelshop.order.boundary;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.order.control.CartService;
 import remast.winkelshop.order.entity.CartItemEntity;
 import remast.winkelshop.auth.boundary.User;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/cart")
@@ -40,7 +41,7 @@ public class CartController {
 
     @PatchMapping("/items/{itemId}")
     public DataResponse<CartItemEntity> updateItem(User user,
-                                                   @PathVariable String itemId,
+                                                   @PathVariable UUID itemId,
                                                    @Valid @RequestBody UpdateCartItemRequest request) {
         var item = cartService.updateItemQuantity(user.userId(), itemId, request.quantity());
         return new DataResponse<>(item);
@@ -48,11 +49,11 @@ public class CartController {
 
     @DeleteMapping("/items/{itemId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteItem(User user, @PathVariable String itemId) {
+    public void deleteItem(User user, @PathVariable UUID itemId) {
         cartService.removeItem(user.userId(), itemId);
     }
 
-    public record AddCartItemRequest(@NotBlank String productId, @Min(1) int quantity) {
+    public record AddCartItemRequest(UUID productId, @Min(1) int quantity) {
     }
 
     public record UpdateCartItemRequest(@Min(1) int quantity) {

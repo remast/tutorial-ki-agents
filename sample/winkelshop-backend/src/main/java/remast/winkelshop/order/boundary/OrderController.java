@@ -10,6 +10,7 @@ import remast.winkelshop.auth.boundary.User;
 import remast.winkelshop.order.control.OrderService;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/orders")
@@ -19,7 +20,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/{orderId}")
-    public DataResponse<OrderService.OrderDetails> getOrder(User user, @PathVariable String orderId) {
+    public DataResponse<OrderService.OrderDetails> getOrder(User user, @PathVariable UUID orderId) {
         return new DataResponse<>(orderService.getOrder(user.userId(), orderId));
     }
 
@@ -37,6 +38,6 @@ public class OrderController {
                 ));
     }
 
-    public record OrderHistoryItem(String orderId, String status, double total, String currency, Instant createdAt) {
+    public record OrderHistoryItem(UUID orderId, String status, double total, String currency, Instant createdAt) {
     }
 }

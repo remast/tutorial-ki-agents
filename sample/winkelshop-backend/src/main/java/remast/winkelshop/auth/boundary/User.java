@@ -1,4 +1,6 @@
 package remast.winkelshop.auth.boundary;
 
-public record User(String userId, String role) {
+import java.util.UUID;
+
+public record User(UUID userId, String role) {
 }

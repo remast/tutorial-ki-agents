@@ -5,11 +5,12 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface UserRepository extends Repository<UserRecord, String> {
+public interface UserRepository extends Repository<UserRecord, UUID> {
 
     @Query("SELECT * FROM users WHERE lower(email) = lower(:email)")
     Optional<UserRecord> findByEmail(@Param("email") String email);
 
-    Optional<UserRecord> findById(String id);
+    Optional<UserRecord> findById(UUID id);
 }

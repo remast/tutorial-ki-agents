@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface CartItemRepository extends Repository<CartItemEntity, Long> {
+public interface CartItemRepository extends Repository<CartItemEntity, UUID> {
 
-    List<CartItemEntity> findByUserIdOrderByCreatedAtAsc(String userId);
+    List<CartItemEntity> findByUserIdOrderByCreatedAtAsc(UUID userId);
 
-    Optional<CartItemEntity> findByUserIdAndItemId(String userId, String itemId);
+    Optional<CartItemEntity> findByUserIdAndItemId(UUID userId, UUID itemId);
 
     CartItemEntity save(CartItemEntity item);
 
@@ -20,5 +21,5 @@ public interface CartItemRepository extends Repository<CartItemEntity, Long> {
 
     @Modifying
     @Query("DELETE FROM cart_items WHERE user_id = :userId")
-    int deleteAllByUserId(@Param("userId") String userId);
+    int deleteAllByUserId(@Param("userId") UUID userId);
 }

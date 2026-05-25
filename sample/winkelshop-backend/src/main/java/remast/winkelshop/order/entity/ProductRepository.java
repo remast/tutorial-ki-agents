@@ -6,10 +6,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface ProductRepository extends Repository<ProductEntity, String> {
+public interface ProductRepository extends Repository<ProductEntity, UUID> {
 
-    Optional<ProductEntity> findById(String id);
+    Optional<ProductEntity> findById(UUID id);
 
     @Query("""
             SELECT * FROM products
@@ -22,7 +23,7 @@ public interface ProductRepository extends Repository<ProductEntity, String> {
             LIMIT :size OFFSET :offset
             """)
     List<ProductEntity> search(@Param("search") String search,
-                               @Param("category") String category,
+                               @Param("category") UUID category,
                                @Param("minPrice") Double minPrice,
                                @Param("maxPrice") Double maxPrice,
                                @Param("inStock") Boolean inStock,
@@ -38,7 +39,7 @@ public interface ProductRepository extends Repository<ProductEntity, String> {
               AND (:inStock IS NULL OR in_stock = :inStock)
             """)
     long countSearch(@Param("search") String search,
-                     @Param("category") String category,
+                     @Param("category") UUID category,
                      @Param("minPrice") Double minPrice,
                      @Param("maxPrice") Double maxPrice,
                      @Param("inStock") Boolean inStock);

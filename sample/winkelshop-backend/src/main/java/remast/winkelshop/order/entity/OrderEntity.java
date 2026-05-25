@@ -4,10 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.UUID;
+
 @Table("orders")
 public record OrderEntity(
-        @Id String id,
-        @Column("user_id") String userId,
+        @Id UUID id,
+        @Column("user_id") UUID userId,
         String status,
         @Column("payment_method") String paymentMethod,
         double total,

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.order.control.ProductService;
 import remast.winkelshop.order.entity.ProductEntity;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class ProductController {
     @GetMapping
     public PagedResponse<ProductListItem> searchProducts(
             @RequestParam(required = false) String search,
-            @RequestParam(required = false) String category,
+            @RequestParam(required = false) UUID category,
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice,
             @RequestParam(required = false) Boolean inStock,
@@ -38,17 +40,17 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public DataResponse<ProductEntity> getProduct(@PathVariable String productId) {
+    public DataResponse<ProductEntity> getProduct(@PathVariable UUID productId) {
         return new DataResponse<>(productService.getProduct(productId));
     }
 
     public record ProductListItem(
-            String id,
+            UUID id,
             String name,
             double price,
             String currency,
             boolean inStock,
-            String categoryId
+            UUID categoryId
     ) {
     }
 }

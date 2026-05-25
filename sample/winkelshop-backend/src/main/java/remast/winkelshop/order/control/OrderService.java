@@ -8,6 +8,8 @@ import remast.winkelshop.order.entity.OrderItemEntity;
 import remast.winkelshop.order.entity.OrderItemRepository;
 import remast.winkelshop.order.entity.OrderRepository;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -15,14 +17,14 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
 
-    public OrderDetails getOrder(String userId, String orderId) {
+    public OrderDetails getOrder(UUID userId, UUID orderId) {
         var order = orderRepository.findByIdAndUserId(orderId, userId)
                 .orElseThrow();
         var items = orderItemRepository.findByOrderId(order.id());
         return new OrderDetails(order, items);
     }
 
-    public PagedResponse<OrderEntity> getOrders(String userId, int page, int size) {
+    public PagedResponse<OrderEntity> getOrders(UUID userId, int page, int size) {
         var safePage = Math.max(page, 0);
         var safeSize = Math.max(size, 1);
         var offset = (long) safePage * safeSize;

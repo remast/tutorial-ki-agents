@@ -3,7 +3,6 @@ package remast.winkelshop.order.control;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import remast.winkelshop.order.entity.CartItemEntity;
 import remast.winkelshop.order.entity.Currency;
 import remast.winkelshop.order.entity.OrderEntity;
 import remast.winkelshop.order.entity.OrderItemEntity;
@@ -15,7 +14,7 @@ import remast.winkelshop.order.entity.ProductRepository;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class CheckoutService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public CheckoutResult checkout(String userId,
+    public CheckoutResult checkout(UUID userId,
                                    String paymentMethod,
                                    String shippingFullName,
                                    String shippingStreet,
@@ -35,7 +34,7 @@ public class CheckoutService {
                                    String shippingPostalCode,
                                    String shippingCountry) {
         var cartItems = cartControl.consumeCart(userId);
-        var products = new HashMap<String, ProductEntity>();
+        var products = new HashMap<UUID, ProductEntity>();
         var total = cartItems.stream()
                 .map(item -> {
                     var product = productRepository.findById(item.productId())
@@ -45,7 +44,7 @@ public class CheckoutService {
                 })
                 .mapToDouble(Double::doubleValue)
                 .sum();
-        var orderId = "ord_" + Instant.now().toEpochMilli();
+        var orderId = UUID.randomUUID();
         var createdAt = Instant.now();
 
         var orderEntity = orderRepository.save(new OrderEntity(
@@ -64,16 +63,14 @@ public class CheckoutService {
         ));
 
         var savedItems = cartItems.stream()
-                .map(item -> {
-                    return orderItemRepository.save(new OrderItemEntity(
-                            null,
-                            orderEntity.id(),
-                            item.productId(),
-                            products.get(item.productId()).name(),
-                            item.quantity(),
-                            item.unitPrice()
-                    ));
-                })
+                .map(item -> orderItemRepository.save(new OrderItemEntity(
+                        UUID.randomUUID(),
+                        orderEntity.id(),
+                        item.productId(),
+                        products.get(item.productId()).name(),
+                        item.quantity(),
+                        item.unitPrice()
+                )))
                 .toList();
 
         return new CheckoutResult(orderEntity, savedItems);
