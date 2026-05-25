@@ -1,16 +1,17 @@
-# Beispiel-Requests und Responses (REST Backend + SPA Frontend)
+# Beispiel-Requests und Responses (Winkelshop REST + SPA)
 
 Annahmen:
-- Base URL: `https://api.zauberbedarf.test`
-- Auth via Bearer Token: `Authorization: Bearer <token>`
+- Base URL: `http://localhost:8080`
+- Auth via Bearer Token: `Authorization: Bearer <accessToken>`
 - JSON als Datenformat
+- Beispielwerte basieren auf `winkelshop-backend/src/main/resources/db/migration/V002__seed_data.sql`
 
-## UC-01: Kategorien durchsuchen
+## UC-01: Kategorien laden
 
 ### Request
 ```http
 GET /categories HTTP/1.1
-Host: api.zauberbedarf.test
+Host: localhost:8080
 Accept: application/json
 ```
 
@@ -19,12 +20,12 @@ Accept: application/json
 {
   "data": [
     {
-      "id": "cat_wands",
+      "id": "11111111-1111-1111-1111-111111111111",
       "name": "Zauberstaebe",
       "description": "Zauberstaebe fuer Hexen und Zauberer"
     },
     {
-      "id": "cat_books",
+      "id": "11111111-1111-1111-1111-111111111112",
       "name": "Buecher",
       "description": "Magische Lehr- und Fachbuecher"
     }
@@ -37,12 +38,12 @@ Accept: application/json
 
 ---
 
-## UC-02: Artikel suchen und filtern
+## UC-02: Produkte laden (Request aus requests.http)
 
 ### Request
 ```http
-GET /products?search=zauberstab&category=cat_wands&minPrice=3&maxPrice=15&inStock=true&page=0&size=20 HTTP/1.1
-Host: api.zauberbedarf.test
+GET /products?category=11111111-1111-1111-1111-111111111112 HTTP/1.1
+Host: localhost:8080
 Accept: application/json
 ```
 
@@ -51,20 +52,37 @@ Accept: application/json
 {
   "content": [
     {
-      "id": "prod_wand_holly_001",
-      "name": "Stechpalme-Zauberstab",
-      "price": 7.0,
-      "currency": "GALLEON",
-      "inStock": true,
-      "categoryId": "cat_wands"
-    },
-    {
-      "id": "prod_book_potions_001",
+      "id": "22222222-2222-2222-2222-222222222222",
       "name": "Fortgeschrittene Zaubertrankkunst",
+      "description": "Lehrbuch fuer fortgeschrittene Trankbrauer",
       "price": 5.0,
       "currency": "GALLEON",
       "inStock": true,
-      "categoryId": "cat_books"
+      "stock": 30,
+      "categoryId": "11111111-1111-1111-1111-111111111112",
+      "imageUrl": "https://cdn.zauberbedarf.test/products/prod_book_potions_001.jpg"
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222223",
+      "name": "Hogwarts: Eine Geschichte",
+      "description": "Historische Chronik von Hogwarts",
+      "price": 4.0,
+      "currency": "GALLEON",
+      "inStock": true,
+      "stock": 20,
+      "categoryId": "11111111-1111-1111-1111-111111111112",
+      "imageUrl": "https://cdn.zauberbedarf.test/products/prod_book_hogwarts_001.jpg"
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222221",
+      "name": "Stechpalme-Zauberstab",
+      "description": "11 Zoll, Phoenixfederkern, passend fuer praezise Zauber",
+      "price": 7.0,
+      "currency": "GALLEON",
+      "inStock": true,
+      "stock": 14,
+      "categoryId": "11111111-1111-1111-1111-111111111111",
+      "imageUrl": "https://cdn.zauberbedarf.test/products/prod_wand_holly_001.jpg"
     }
   ],
   "pageable": {
@@ -81,7 +99,7 @@ Accept: application/json
   },
   "last": true,
   "totalPages": 1,
-  "totalElements": 2,
+  "totalElements": 3,
   "size": 20,
   "number": 0,
   "sort": {
@@ -89,20 +107,20 @@ Accept: application/json
     "unsorted": true,
     "empty": true
   },
-  "first": true,
-  "numberOfElements": 2,
-  "empty": false
+  "numberOfElements": 3
 }
 ```
 
+Hinweis: Das Backend hat zusaetzlich den Endpunkt `GET /products/category/{categoryId}` fuer echtes Kategorie-Filtering.
+
 ---
 
-## UC-03: Artikeldetails anzeigen
+## UC-03: Produktdetails laden
 
 ### Request
 ```http
-GET /products/prod_wand_holly_001 HTTP/1.1
-Host: api.zauberbedarf.test
+GET /products/22222222-2222-2222-2222-222222222221 HTTP/1.1
+Host: localhost:8080
 Accept: application/json
 ```
 
@@ -110,14 +128,14 @@ Accept: application/json
 ```json
 {
   "data": {
-    "id": "prod_wand_holly_001",
+    "id": "22222222-2222-2222-2222-222222222221",
     "name": "Stechpalme-Zauberstab",
     "description": "11 Zoll, Phoenixfederkern, passend fuer praezise Zauber",
     "price": 7.0,
     "currency": "GALLEON",
     "inStock": true,
     "stock": 14,
-    "categoryId": "cat_wands",
+    "categoryId": "11111111-1111-1111-1111-111111111111",
     "imageUrl": "https://cdn.zauberbedarf.test/products/prod_wand_holly_001.jpg"
   }
 }
@@ -125,12 +143,12 @@ Accept: application/json
 
 ---
 
-## UC-04: Anmelden
+## UC-04: Login und Logout
 
-### Request
+### Login Request
 ```http
 POST /auth/login HTTP/1.1
-Host: api.zauberbedarf.test
+Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
@@ -140,52 +158,75 @@ Accept: application/json
 }
 ```
 
-### Response (200 OK)
+### Login Response (200 OK)
 ```json
 {
   "data": {
-    "accessToken": "eyJhbGciOi...",
+    "accessToken": "<jwt-oder-random-token>",
     "tokenType": "Bearer",
     "expiresIn": 3600,
     "user": {
-      "id": "usr_harry",
+      "id": "33333333-3333-3333-3333-333333333331",
       "name": "Harry Potter",
-      "role": "buyer"
+      "email": "harry.potter@hogwarts.test",
+      "password": "Expelliarmus123!",
+      "role": "buyer",
+      "createdAt": "2026-01-01T00:00:00Z"
     }
   }
 }
 ```
 
-## UC-04: Abmelden
-
-### Request
+### Logout Request
 ```http
 POST /auth/logout HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
+Host: localhost:8080
+Authorization: Bearer <accessToken>
 Accept: application/json
 ```
 
-### Response (204 No Content)
-```json
-{}
+### Logout Response (204 No Content)
+```http
+<leerer Body>
 ```
 
 ---
 
-## UC-05: Artikel in Warenkorb legen
+## UC-05: Warenkorb ansehen
+
+### Request
+```http
+GET /cart HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+Accept: application/json
+```
+
+### Response (200 OK, leerer Warenkorb)
+```json
+{
+  "data": {
+    "items": [],
+    "currency": "GALLEON"
+  }
+}
+```
+
+---
+
+## UC-06: Artikel in den Warenkorb legen
 
 ### Request
 ```http
 POST /cart/items HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
+Host: localhost:8080
+Authorization: Bearer <accessToken>
 Content-Type: application/json
 Accept: application/json
 
 {
-  "productId": "prod_wand_holly_001",
-  "quantity": 2
+  "productId": "22222222-2222-2222-2222-222222222221",
+  "quantity": 1
 }
 ```
 
@@ -193,169 +234,125 @@ Accept: application/json
 ```json
 {
   "data": {
-    "itemId": "item_abc123",
-    "productId": "prod_wand_holly_001",
-    "quantity": 2,
-    "unitPrice": 7.0,
-    "lineTotal": 14.0
+    "items": [
+      {
+        "itemId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "productId": "22222222-2222-2222-2222-222222222221",
+        "name": "Stechpalme-Zauberstab",
+        "quantity": 1,
+        "unitPrice": 7.0
+      }
+    ],
+    "currency": "GALLEON"
   }
 }
 ```
 
 ---
 
-## UC-06: Warenkorb anzeigen
+## UC-07: Mehrere Artikel hinzufuegen (aus requests.http)
 
-### Request
+### Request 1
 ```http
-GET /cart HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
-Accept: application/json
+POST /cart/items HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+Content-Type: application/json
+
+{
+  "productId": "22222222-2222-2222-2222-222222222222",
+  "quantity": 2
+}
 ```
 
-### Response (200 OK)
+### Request 2
+```http
+POST /cart/items HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+Content-Type: application/json
+
+{
+  "productId": "22222222-2222-2222-2222-222222222223",
+  "quantity": 1
+}
+```
+
+### Response nach Request 2 (201 Created)
 ```json
 {
   "data": {
     "items": [
       {
-        "itemId": "item_abc123",
-        "productId": "prod_wand_holly_001",
+        "itemId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "productId": "22222222-2222-2222-2222-222222222221",
         "name": "Stechpalme-Zauberstab",
+        "quantity": 1,
+        "unitPrice": 7.0
+      },
+      {
+        "itemId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "productId": "22222222-2222-2222-2222-222222222222",
+        "name": "Fortgeschrittene Zaubertrankkunst",
         "quantity": 2,
-        "unitPrice": 7.0,
-        "lineTotal": 14.0
+        "unitPrice": 5.0
+      },
+      {
+        "itemId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+        "productId": "22222222-2222-2222-2222-222222222223",
+        "name": "Hogwarts: Eine Geschichte",
+        "quantity": 1,
+        "unitPrice": 4.0
       }
     ],
-    "subtotal": 14.0,
     "currency": "GALLEON"
   }
 }
 ```
 
-## UC-06: Menge im Warenkorb aendern
+---
 
-### Request
+## UC-08: Warenkorbposition aktualisieren und loeschen
+
+### Menge aendern
 ```http
-PATCH /cart/items/item_abc123 HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
+PATCH /cart/items/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
 Content-Type: application/json
-Accept: application/json
 
 {
   "quantity": 3
 }
 ```
 
-### Response (200 OK)
+### Artikel entfernen
+```http
+DELETE /cart/items/cccccccc-cccc-cccc-cccc-cccccccccccc HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+```
+
+### Response nach DELETE (200 OK)
 ```json
 {
   "data": {
-    "itemId": "item_abc123",
-    "quantity": 3,
-    "unitPrice": 7.0,
-    "lineTotal": 21.0
-  }
-}
-```
-
-## UC-06: Artikel aus Warenkorb entfernen
-
-### Request
-```http
-DELETE /cart/items/item_abc123 HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
-Accept: application/json
-```
-
-### Response (204 No Content)
-```json
-{}
-```
-
----
-
-## UC-07: Checkout durchfuehren
-
-### Request
-```http
-POST /checkout HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
-Content-Type: application/json
-Accept: application/json
-
-{
-  "shippingAddress": {
-    "fullName": "Harry Potter",
-    "street": "Ligusterweg 4",
-    "city": "Little Whinging",
-    "postalCode": "12345",
-    "country": "UK"
-  },
-  "paymentMethod": "invoice"
-}
-```
-
-### Response (201 Created)
-```json
-{
-  "data": {
-    "orderId": "ord_2026_0001",
-    "status": "placed",
-    "total": 21.0,
-    "currency": "GALLEON",
-    "placedAt": "2026-05-25T10:15:30Z"
-  }
-}
-```
-
----
-
-## UC-08: Bestellbestaetigung anzeigen
-
-### Request
-```http
-GET /orders/ord_2026_0001 HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
-Accept: application/json
-```
-
-### Response (200 OK)
-```json
-{
-  "data": {
-    "orderId": "ord_2026_0001",
-    "status": "placed",
     "items": [
       {
-        "productId": "prod_wand_holly_001",
+        "itemId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "productId": "22222222-2222-2222-2222-222222222221",
         "name": "Stechpalme-Zauberstab",
-        "quantity": 3,
-        "unitPrice": 7.0,
-        "lineTotal": 21.0
+        "quantity": 1,
+        "unitPrice": 7.0
       },
       {
-        "productId": "prod_book_hogwarts_001",
-        "name": "Hogwarts: Eine Geschichte",
-        "quantity": 1,
-        "unitPrice": 4.0,
-        "lineTotal": 4.0
+        "itemId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "productId": "22222222-2222-2222-2222-222222222222",
+        "name": "Fortgeschrittene Zaubertrankkunst",
+        "quantity": 3,
+        "unitPrice": 5.0
       }
     ],
-    "shippingAddress": {
-      "fullName": "Harry Potter",
-      "street": "Ligusterweg 4",
-      "city": "Little Whinging",
-      "postalCode": "12345",
-      "country": "UK"
-    },
-    "paymentMethod": "invoice",
-    "total": 25.0,
     "currency": "GALLEON"
   }
 }
@@ -363,13 +360,128 @@ Accept: application/json
 
 ---
 
-## UC-09: Bestellhistorie anzeigen
+## UC-09: Checkout
+
+### Request
+```http
+POST /checkout HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+Content-Type: application/json
+
+{
+  "paymentMethod": "credit-card",
+  "shippingAddress": {
+    "fullName": "Harry Potter",
+    "street": "4 Privet Drive",
+    "city": "Little Whinging",
+    "postalCode": "CR3 0AA",
+    "country": "UK"
+  }
+}
+```
+
+### Response (201 Created)
+```json
+{
+  "data": {
+    "order": {
+      "id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+      "userId": "33333333-3333-3333-3333-333333333331",
+      "status": "placed",
+      "paymentMethod": "credit-card",
+      "total": 22.0,
+      "currency": "GALLEON",
+      "shippingFullName": "Harry Potter",
+      "shippingStreet": "4 Privet Drive",
+      "shippingCity": "Little Whinging",
+      "shippingPostalCode": "CR3 0AA",
+      "shippingCountry": "UK",
+      "createdAt": "2026-05-25T12:00:00Z"
+    },
+    "items": [
+      {
+        "id": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+        "orderId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+        "productId": "22222222-2222-2222-2222-222222222221",
+        "name": "Stechpalme-Zauberstab",
+        "quantity": 1,
+        "unitPrice": 7.0
+      },
+      {
+        "id": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "orderId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+        "productId": "22222222-2222-2222-2222-222222222222",
+        "name": "Fortgeschrittene Zaubertrankkunst",
+        "quantity": 3,
+        "unitPrice": 5.0
+      }
+    ]
+  }
+}
+```
+
+---
+
+## UC-10: Order Details abrufen
+
+### Request
+```http
+GET /orders/44444444-4444-4444-4444-444444444441 HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer <accessToken>
+Accept: application/json
+```
+
+### Response (200 OK)
+```json
+{
+  "data": {
+    "order": {
+      "id": "44444444-4444-4444-4444-444444444441",
+      "userId": "33333333-3333-3333-3333-333333333331",
+      "status": "placed",
+      "paymentMethod": "invoice",
+      "total": 25.0,
+      "currency": "GALLEON",
+      "shippingFullName": "Harry Potter",
+      "shippingStreet": "Ligusterweg 4",
+      "shippingCity": "Little Whinging",
+      "shippingPostalCode": "12345",
+      "shippingCountry": "UK",
+      "createdAt": "2026-05-25T10:15:30Z"
+    },
+    "items": [
+      {
+        "id": "55555555-5555-5555-5555-555555555551",
+        "orderId": "44444444-4444-4444-4444-444444444441",
+        "productId": "22222222-2222-2222-2222-222222222221",
+        "name": "Stechpalme-Zauberstab",
+        "quantity": 3,
+        "unitPrice": 7.0
+      },
+      {
+        "id": "55555555-5555-5555-5555-555555555552",
+        "orderId": "44444444-4444-4444-4444-444444444441",
+        "productId": "22222222-2222-2222-2222-222222222223",
+        "name": "Hogwarts: Eine Geschichte",
+        "quantity": 1,
+        "unitPrice": 4.0
+      }
+    ]
+  }
+}
+```
+
+---
+
+## UC-11: Order-Historie abrufen
 
 ### Request
 ```http
 GET /orders?page=0&size=20 HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
+Host: localhost:8080
+Authorization: Bearer <accessToken>
 Accept: application/json
 ```
 
@@ -378,14 +490,14 @@ Accept: application/json
 {
   "content": [
     {
-      "orderId": "ord_2026_0001",
+      "orderId": "44444444-4444-4444-4444-444444444441",
       "status": "placed",
       "total": 25.0,
       "currency": "GALLEON",
       "createdAt": "2026-05-25T10:15:30Z"
     },
     {
-      "orderId": "ord_2026_0002",
+      "orderId": "44444444-4444-4444-4444-444444444442",
       "status": "shipped",
       "total": 8.0,
       "currency": "GALLEON",
@@ -414,26 +526,23 @@ Accept: application/json
     "unsorted": true,
     "empty": true
   },
-  "first": true,
-  "numberOfElements": 2,
-  "empty": false
+  "numberOfElements": 2
 }
 ```
 
 ---
 
-## Optional: Fehlerbeispiel (Validierung)
+## Optional: Validierungsfehler
 
 ### Request
 ```http
 POST /cart/items HTTP/1.1
-Host: api.zauberbedarf.test
-Authorization: Bearer <token>
+Host: localhost:8080
+Authorization: Bearer <accessToken>
 Content-Type: application/json
-Accept: application/json
 
 {
-  "productId": "prod_wand_holly_001",
+  "productId": "22222222-2222-2222-2222-222222222221",
   "quantity": 0
 }
 ```
@@ -441,15 +550,9 @@ Accept: application/json
 ### Response (400 Bad Request)
 ```json
 {
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "quantity must be greater than 0",
-    "fields": [
-      {
-        "name": "quantity",
-        "message": "must be >= 1"
-      }
-    ]
-  }
+  "timestamp": "2026-05-25T12:10:00.000+00:00",
+  "status": 400,
+  "error": "Bad Request",
+  "path": "/cart/items"
 }
 ```
