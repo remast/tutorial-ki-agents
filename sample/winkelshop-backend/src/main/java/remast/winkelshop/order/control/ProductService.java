@@ -16,17 +16,20 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public PagedResponse<ProductEntity> searchProducts(int page,
+    public PagedResponse<ProductEntity> searchProducts(UUID categoryId,
+                                                       int page,
                                                        int size) {
-        var result = productRepository.findAll(createPageRequest(page, size));
+        var pageable = createPageRequest(page, size);
+        var result = categoryId == null
+                ? productRepository.findAll(pageable)
+                : productRepository.findByCategoryId(categoryId, pageable);
         return toPagedResponse(result.getContent(), page, size, result.getTotalElements());
     }
 
     public PagedResponse<ProductEntity> getProductsByCategory(UUID categoryId,
                                                               int page,
                                                               int size) {
-        var result = productRepository.findByCategoryId(categoryId, createPageRequest(page, size));
-        return toPagedResponse(result.getContent(), page, size, result.getTotalElements());
+        return searchProducts(categoryId, page, size);
     }
 
     public ProductEntity getProduct(UUID productId) {

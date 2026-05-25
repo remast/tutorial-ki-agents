@@ -20,10 +20,13 @@ public class ProductController {
 
     @GetMapping
     public PagedResponse<ProductEntity> searchProducts(
+            @RequestParam(name = "categoryId", required = false) UUID categoryId,
+            @RequestParam(name = "category", required = false) UUID category,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        return productService.searchProducts(page, size);
+        var effectiveCategoryId = categoryId != null ? categoryId : category;
+        return productService.searchProducts(effectiveCategoryId, page, size);
     }
 
     @GetMapping("/category/{categoryId}")
@@ -32,7 +35,7 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        return productService.getProductsByCategory(categoryId, page, size);
+        return productService.searchProducts(categoryId, page, size);
     }
 
     @GetMapping("/{productId}")
