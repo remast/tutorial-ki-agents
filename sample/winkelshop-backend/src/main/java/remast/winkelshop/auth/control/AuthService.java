@@ -2,9 +2,9 @@ package remast.winkelshop.auth.control;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import remast.winkelshop.auth.boundary.User;
 import remast.winkelshop.auth.entity.UserRepository;
 import remast.winkelshop.auth.entity.UserRecord;
-import remast.winkelshop.auth.boundary.AuthenticatedUser;
 
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public class AuthService {
                 .filter(account -> account.password().equals(password))
                 .orElseThrow();
 
-        var token = tokenStore.issue(new AuthenticatedUser(user.id(), user.role()));
+        var token = tokenStore.issue(new User(user.id(), user.role()));
         return new LoginResult(token, user);
     }
 
@@ -30,7 +30,7 @@ public class AuthService {
         tokenStore.revoke(token);
     }
 
-    public Optional<AuthenticatedUser> resolveUserByToken(String token) {
+    public Optional<User> resolveUserByToken(String token) {
         return tokenStore.resolve(token);
     }
 

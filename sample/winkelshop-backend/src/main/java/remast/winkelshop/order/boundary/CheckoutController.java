@@ -4,14 +4,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import remast.winkelshop.auth.boundary.User;
 import remast.winkelshop.order.control.CheckoutService;
-import remast.winkelshop.auth.boundary.AuthenticatedUser;
 
 @RestController
 @RequestMapping("/checkout")
@@ -22,12 +21,11 @@ public class CheckoutController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse<CheckoutService.CheckoutResult> checkout(Authentication authentication,
+    public DataResponse<CheckoutService.CheckoutResult> checkout(User user,
                                                                  @Valid @RequestBody CheckoutRequest request) {
-        var userId = ((AuthenticatedUser) authentication.getPrincipal()).userId();
         var shippingAddress = request.shippingAddress();
         var result = checkoutService.checkout(
-                userId,
+                user.userId(),
                 request.paymentMethod(),
                 shippingAddress.fullName(),
                 shippingAddress.street(),

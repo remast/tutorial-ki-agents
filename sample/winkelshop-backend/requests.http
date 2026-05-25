@@ -2,6 +2,11 @@
 
 GET http://localhost:8080/categories
 
+### Get Cart
+
+GET http://localhost:8080/cart
+Authorization: Bearer {{accessToken}}
+
 ### Login
 
 POST http://localhost:8080/auth/login
@@ -11,3 +16,9 @@ Content-Type: application/json
   "email": "harry.potter@hogwarts.test",
   "password": "Expelliarmus123!"
 }
+
+> {%
+    client.test("Store accessToken", function () {
+        client.global.set("accessToken", jsonPath(response.body, "$.data.accessToken",))
+    });
+%}
