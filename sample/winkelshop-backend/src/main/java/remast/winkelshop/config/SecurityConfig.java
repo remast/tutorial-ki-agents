@@ -24,12 +24,14 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/categories", "/v1/products/**", "/v1/auth/login").permitAll()
-                        .requestMatchers("/v1/cart/**", "/v1/checkout", "/v1/orders/**", "/v1/auth/logout").authenticated()
+                        .requestMatchers("/categories", "/products/**", "/auth/login", "/h2-console/**").permitAll()
+                        .requestMatchers("/cart/**", "/checkout", "/orders/**", "/auth/logout").authenticated()
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .addFilterBefore(bearerFilter, UsernamePasswordAuthenticationFilter.class)
                 .anonymous(Customizer.withDefaults());
+
+        http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
     }

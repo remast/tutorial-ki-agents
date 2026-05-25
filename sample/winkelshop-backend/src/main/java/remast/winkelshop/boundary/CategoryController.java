@@ -11,9 +11,9 @@ import remast.winkelshop.entity.Category;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/categories")
+@RequestMapping("/categories")
 @RequiredArgsConstructor
-public class CategoryBoundary {
+public class CategoryController {
 
     private final CategoryControl categoryControl;
 

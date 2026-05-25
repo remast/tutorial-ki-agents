@@ -1,1 +1,13 @@
-GET http://localhost:8080/v1/categories
+### Get Categories
+
+GET http://localhost:8080/categories
+
+### Login
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "harry.potter@hogwarts.test",
+  "password": "Expelliarmus123!"
+}

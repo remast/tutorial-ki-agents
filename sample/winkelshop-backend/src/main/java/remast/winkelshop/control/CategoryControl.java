@@ -1,21 +1,21 @@
 package remast.winkelshop.control;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import remast.winkelshop.entity.CategoryRepository;
 import remast.winkelshop.entity.Category;
-import remast.winkelshop.entity.SeedData;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryControl {
 
-    private final SeedData seedData;
-
-    public CategoryControl(SeedData seedData) {
-        this.seedData = seedData;
-    }
+    private final CategoryRepository categoryRepository;
 
     public List<Category> getAllCategories() {
-        return seedData.getCategories();
+        return categoryRepository.findAll().stream()
+                .map(record -> new Category(record.id(), record.name(), record.description()))
+                .toList();
     }
 }

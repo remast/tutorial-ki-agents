@@ -18,7 +18,7 @@ import java.time.Instant;
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
-public class OrderBoundary {
+public class OrderController {
 
     private final OrderControl orderControl;
 

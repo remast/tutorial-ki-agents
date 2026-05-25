@@ -21,9 +21,9 @@ import remast.winkelshop.entity.CartItem;
 import remast.winkelshop.security.AuthenticatedUser;
 
 @RestController
-@RequestMapping("/v1/cart")
+@RequestMapping("/cart")
 @RequiredArgsConstructor
-public class CartBoundary {
+public class CartController {
 
     private final CartControl cartControl;
 

@@ -1,7 +1,7 @@
 # Beispiel-Requests und Responses (REST Backend + SPA Frontend)
 
 Annahmen:
-- Base URL: `https://api.zauberbedarf.test/v1`
+- Base URL: `https://api.zauberbedarf.test`
 - Auth via Bearer Token: `Authorization: Bearer <token>`
 - JSON als Datenformat
 
@@ -9,7 +9,7 @@ Annahmen:
 
 ### Request
 ```http
-GET /v1/categories HTTP/1.1
+GET /categories HTTP/1.1
 Host: api.zauberbedarf.test
 Accept: application/json
 ```
@@ -41,7 +41,7 @@ Accept: application/json
 
 ### Request
 ```http
-GET /v1/products?search=zauberstab&category=cat_wands&minPrice=3&maxPrice=15&inStock=true&page=0&size=20 HTTP/1.1
+GET /products?search=zauberstab&category=cat_wands&minPrice=3&maxPrice=15&inStock=true&page=0&size=20 HTTP/1.1
 Host: api.zauberbedarf.test
 Accept: application/json
 ```
@@ -101,7 +101,7 @@ Accept: application/json
 
 ### Request
 ```http
-GET /v1/products/prod_wand_holly_001 HTTP/1.1
+GET /products/prod_wand_holly_001 HTTP/1.1
 Host: api.zauberbedarf.test
 Accept: application/json
 ```
@@ -129,7 +129,7 @@ Accept: application/json
 
 ### Request
 ```http
-POST /v1/auth/login HTTP/1.1
+POST /auth/login HTTP/1.1
 Host: api.zauberbedarf.test
 Content-Type: application/json
 Accept: application/json
@@ -160,7 +160,7 @@ Accept: application/json
 
 ### Request
 ```http
-POST /v1/auth/logout HTTP/1.1
+POST /auth/logout HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Accept: application/json
@@ -177,7 +177,7 @@ Accept: application/json
 
 ### Request
 ```http
-POST /v1/cart/items HTTP/1.1
+POST /cart/items HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -208,7 +208,7 @@ Accept: application/json
 
 ### Request
 ```http
-GET /v1/cart HTTP/1.1
+GET /cart HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Accept: application/json
@@ -238,7 +238,7 @@ Accept: application/json
 
 ### Request
 ```http
-PATCH /v1/cart/items/item_abc123 HTTP/1.1
+PATCH /cart/items/item_abc123 HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -265,7 +265,7 @@ Accept: application/json
 
 ### Request
 ```http
-DELETE /v1/cart/items/item_abc123 HTTP/1.1
+DELETE /cart/items/item_abc123 HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Accept: application/json
@@ -282,7 +282,7 @@ Accept: application/json
 
 ### Request
 ```http
-POST /v1/checkout HTTP/1.1
+POST /checkout HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -319,7 +319,7 @@ Accept: application/json
 
 ### Request
 ```http
-GET /v1/orders/ord_2026_0001 HTTP/1.1
+GET /orders/ord_2026_0001 HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Accept: application/json
@@ -367,7 +367,7 @@ Accept: application/json
 
 ### Request
 ```http
-GET /v1/orders?page=0&size=20 HTTP/1.1
+GET /orders?page=0&size=20 HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Accept: application/json
@@ -426,7 +426,7 @@ Accept: application/json
 
 ### Request
 ```http
-POST /v1/cart/items HTTP/1.1
+POST /cart/items HTTP/1.1
 Host: api.zauberbedarf.test
 Authorization: Bearer <token>
 Content-Type: application/json

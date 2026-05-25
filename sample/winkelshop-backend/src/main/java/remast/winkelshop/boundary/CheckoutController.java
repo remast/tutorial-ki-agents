@@ -19,9 +19,9 @@ import remast.winkelshop.security.AuthenticatedUser;
 import java.time.Instant;
 
 @RestController
-@RequestMapping("/v1/checkout")
+@RequestMapping("/checkout")
 @RequiredArgsConstructor
-public class CheckoutBoundary {
+public class CheckoutController {
 
     private final CheckoutControl checkoutControl;
 

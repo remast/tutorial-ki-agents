@@ -1,63 +1,40 @@
 package remast.winkelshop.control;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import remast.winkelshop.entity.SeedData;
+import remast.winkelshop.entity.UserRepository;
 import remast.winkelshop.entity.UserAccount;
+import remast.winkelshop.entity.UserRecord;
 import remast.winkelshop.security.AuthenticatedUser;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AuthControl {
 
     public static final long TOKEN_EXPIRES_IN_SECONDS = 3600;
 
-    private final SeedData seedData;
-
-    public AuthControl(SeedData seedData) {
-        this.seedData = seedData;
-    }
+    private final UserRepository userRepository;
+    private final TokenStore tokenStore;
 
     public LoginResult login(String email, String password) {
-        UserAccount user = seedData.findUserByEmail(email)
-                .filter(account -> account.getPassword().equals(password))
+        UserRecord user = userRepository.findByEmail(email)
+                .filter(account -> account.password().equals(password))
                 .orElseThrow(() -> new UnauthorizedException("invalid credentials"));
 
-        String token = UUID.randomUUID().toString();
-        seedData.getTokenToUserId().put(token, user.getId());
-        return new LoginResult(token, user);
+        String token = tokenStore.issue(new AuthenticatedUser(user.id(), user.role()));
+        return new LoginResult(token, new UserAccount(user.id(), user.name(), user.email(), user.password(), user.role()));
     }
 
     public void logout(String token) {
-        seedData.getTokenToUserId().remove(token);
+        tokenStore.revoke(token);
     }
 
     public Optional<AuthenticatedUser> resolveUserByToken(String token) {
-        String userId = seedData.getTokenToUserId().get(token);
-        if (userId == null) {
-            return Optional.empty();
-        }
-        return seedData.findUserById(userId)
-                .map(user -> new AuthenticatedUser(user.getId(), user.getRole()));
+        return tokenStore.resolve(token);
     }
 
-    public static class LoginResult {
-
-        private final String accessToken;
-        private final UserAccount user;
-
-        public LoginResult(String accessToken, UserAccount user) {
-            this.accessToken = accessToken;
-            this.user = user;
-        }
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public UserAccount getUser() {
-            return user;
-        }
+    public record LoginResult(String accessToken, UserAccount user) {
     }
 }
