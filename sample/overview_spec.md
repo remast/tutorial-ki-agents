@@ -4,6 +4,18 @@
 
 Ein Online-Shop für magischen Bedarf (Zauberstäbe, Bücher, Tränke, Roben u. v. m.). Artikel sind in Kategorien organisiert. Ein Checkout-Prozess ermöglicht Bestellungen ohne echte Zahlungsabwicklung (Simulation/Platzhalter).
 
+## Test-Accounts (vordefiniert)
+
+Für Demo- und Testzwecke ist **keine Registrierung** vorgesehen. Stattdessen stehen folgende Käufer-Accounts bereit:
+
+| Name | E-Mail | Passwort | Rolle |
+|------|--------|----------|-------|
+| Harry Potter | harry.potter@hogwarts.test | Expelliarmus123! | Käufer |
+| Hermione Granger | hermione.granger@hogwarts.test | Expelliarmus123! | Käufer |
+| Ron Weasley | ron.weasley@hogwarts.test | Expelliarmus123! | Käufer |
+| Draco Malfoy | draco.malfoy@hogwarts.test | Expelliarmus123! | Käufer |
+| Luna Lovegood | luna.lovegood@hogwarts.test | Expelliarmus123! | Käufer |
+
 ---
 
 ## Akteure
@@ -46,19 +58,10 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ---
 
-### UC-04: Konto registrieren
-**Akteur:** Besucher  
-**Ziel:** Eigenes Kundenkonto anlegen  
-**Beschreibung:** Der Besucher gibt Name, E-Mail und Passwort an. Nach Bestätigung ist das Konto aktiv.  
-**Vorbedingung:** E-Mail noch nicht registriert  
-**Ergebnis:** Konto wurde erstellt, Besucher ist nun Käufer
-
----
-
-### UC-05: Anmelden / Abmelden
+### UC-04: Anmelden / Abmelden
 **Akteur:** Besucher  
 **Ziel:** Mit bestehendem Konto einloggen  
-**Beschreibung:** Der Besucher gibt Anmeldedaten ein. Bei Erfolg erhält er Zugang zu Käufer-Funktionen. Abmelden beendet die Sitzung.  
+**Beschreibung:** Der Besucher gibt Anmeldedaten eines vorhandenen (vordefinierten) Kontos ein. Bei Erfolg erhält er Zugang zu Käufer-Funktionen. Abmelden beendet die Sitzung.  
 **Vorbedingung:** Konto existiert  
 **Ergebnis:** Benutzer ist ein- oder ausgeloggt
 
@@ -66,7 +69,7 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ## Use Cases – Käufer (eingeloggt)
 
-### UC-06: Artikel in Warenkorb legen
+### UC-05: Artikel in Warenkorb legen
 **Akteur:** Käufer  
 **Ziel:** Gewünschte Artikel für den Kauf vormerken  
 **Beschreibung:** Auf der Detailseite oder Listenansicht wählt der Käufer eine Menge und legt den Artikel in den Warenkorb.  
@@ -75,7 +78,7 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ---
 
-### UC-07: Warenkorb verwalten
+### UC-06: Warenkorb verwalten
 **Akteur:** Käufer  
 **Ziel:** Warenkorb prüfen und anpassen  
 **Beschreibung:** Der Käufer sieht alle vorgemerkten Artikel mit Mengen und Gesamtpreis. Er kann Mengen ändern oder Artikel entfernen.  
@@ -84,7 +87,7 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ---
 
-### UC-08: Checkout durchführen
+### UC-07: Checkout durchführen
 **Akteur:** Käufer  
 **Ziel:** Bestellung abschicken  
 **Beschreibung:** Der Käufer gibt eine Lieferadresse an und wählt eine Zahlungsart (Simulation: z. B. „Galleon-Überweisung" oder „Auf Rechnung"). Eine echte Zahlungsabwicklung findet nicht statt. Der Käufer bestätigt die Bestellung.  
@@ -98,7 +101,7 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ---
 
-### UC-09: Bestellbestätigung erhalten
+### UC-08: Bestellbestätigung erhalten
 **Akteur:** Käufer  
 **Ziel:** Sicherheit über die aufgegebene Bestellung  
 **Beschreibung:** Nach erfolgreichem Checkout wird eine Bestätigungsseite angezeigt (Bestellnummer, Zusammenfassung). Eine Bestätigungs-E-Mail (simuliert) wird versendet.  
@@ -107,7 +110,7 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 
 ---
 
-### UC-10: Bestellhistorie anzeigen
+### UC-09: Bestellhistorie anzeigen
 **Akteur:** Käufer  
 **Ziel:** Vergangene Bestellungen einsehen  
 **Beschreibung:** Im persönlichen Bereich sieht der Käufer eine Liste seiner Bestellungen mit Datum, Status und bestellten Artikeln.  
@@ -135,7 +138,8 @@ Ein Käufer erbt alle Fähigkeiten eines Besuchers (Generalisierung).
 - Wunschliste
 - Rabattcodes / Aktionen
 - Mehrstufige Rollenverwaltung
+- Selbstregistrierung von Nutzern
 
 ---
 
-*Version 0.1 – Initiale High-Level-Spezifikation*
+*Version 0.2 – Registrierung entfernt, Test-Accounts ergänzt*
