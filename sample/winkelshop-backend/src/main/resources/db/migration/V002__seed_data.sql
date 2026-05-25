@@ -1,9 +1,9 @@
 INSERT INTO categories (id, name, description) VALUES
-('11111111-1111-1111-1111-111111111111', 'Zauberstaebe', 'Zauberstaebe fuer Hexen und Zauberer'),
-('11111111-1111-1111-1111-111111111112', 'Buecher', 'Magische Lehr- und Fachbuecher');
+('11111111-1111-1111-1111-111111111111', 'Zauberstäbe', 'Zauberstaebe fuer Hexen und Zauberer'),
+('11111111-1111-1111-1111-111111111112', 'Bücher', 'Magische Lehr- und Fachbuecher');
 
 INSERT INTO products (id, name, description, price, currency, in_stock, stock, category_id, image_url) VALUES
-('22222222-2222-2222-2222-222222222221', 'Stechpalme-Zauberstab', '11 Zoll, Phoenixfederkern, passend fuer praezise Zauber', 7.0, 'GALLEON', TRUE, 14, '11111111-1111-1111-1111-111111111111', 'https://cdn.zauberbedarf.test/products/prod_wand_holly_001.jpg'),
+('22222222-2222-2222-2222-222222222221', 'Stechpalme-Zauberstab', '11 Zoll, Phönixfederkern, passend fuer praezise Zauber', 7.0, 'GALLEON', TRUE, 14, '11111111-1111-1111-1111-111111111111', 'https://cdn.zauberbedarf.test/products/prod_wand_holly_001.jpg'),
 ('22222222-2222-2222-2222-222222222222', 'Fortgeschrittene Zaubertrankkunst', 'Lehrbuch fuer fortgeschrittene Trankbrauer', 5.0, 'GALLEON', TRUE, 30, '11111111-1111-1111-1111-111111111112', 'https://cdn.zauberbedarf.test/products/prod_book_potions_001.jpg'),
 ('22222222-2222-2222-2222-222222222223', 'Hogwarts: Eine Geschichte', 'Historische Chronik von Hogwarts', 4.0, 'GALLEON', TRUE, 20, '11111111-1111-1111-1111-111111111112', 'https://cdn.zauberbedarf.test/products/prod_book_hogwarts_001.jpg');
 

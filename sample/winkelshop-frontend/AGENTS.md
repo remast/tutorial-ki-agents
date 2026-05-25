@@ -53,3 +53,11 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Project Structure
+
+- Keep top-level app domains in `src/app/auth` and `src/app/order`.
+- Place route entry components under each domain's `pages/` folder.
+- Place domain data contracts under each domain's `models/` folder.
+- Place API and state classes under each domain's `services/` folder.
+- Keep auth-only concerns (guards, interceptor) under `src/app/auth/guards` and `src/app/auth/interceptors`.

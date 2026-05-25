@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthStateService } from './auth-state.service';
+import { AuthStateService } from '../../services/auth-state.service';
 
 interface LoginFormModel {
   email: FormControl<string>;

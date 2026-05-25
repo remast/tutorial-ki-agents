@@ -1,20 +1,20 @@
 import { Routes } from '@angular/router';
 
-import { authGuard, guestOnlyGuard } from './auth/auth.guard';
+import { authGuard, guestOnlyGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     canActivate: [guestOnlyGuard],
     loadComponent: () =>
-      import('./auth/login-page').then(
+      import('./auth/pages/login-page/login-page').then(
         (module) => module.LoginPage
       )
   },
   {
     path: '',
     loadComponent: () =>
-      import('./winkelshop/winkelshop-page').then(
+      import('./order/pages/winkelshop-page/winkelshop-page').then(
         (module) => module.WinkelshopPage
       )
   },
@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'checkout',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./checkout/checkout-page').then(
+      import('./order/pages/checkout-page/checkout-page').then(
         (module) => module.CheckoutPage
       )
   },

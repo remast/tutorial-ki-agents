@@ -4,13 +4,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
-import { AuthApiService } from '../auth/auth-api.service';
-import {
-  type CartItem,
-  type CartResponse,
-  type CheckoutResponse
-} from '../auth/auth.models';
-import { AuthStateService } from '../auth/auth-state.service';
+import { AuthStateService } from '../../../auth/services/auth-state.service';
+import type { CartItem, CartResponse } from '../../models/cart.models';
+import type { CheckoutResponse } from '../../models/checkout.models';
+import { CartApiService } from '../../services/cart-api.service';
+import { CheckoutApiService } from '../../services/checkout-api.service';
 
 interface ShippingAddressFormModel {
   fullName: FormControl<string>;
@@ -41,7 +39,8 @@ const EMPTY_CART_RESPONSE: CartResponse = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckoutPage {
-  private readonly authApiService = inject(AuthApiService);
+  private readonly cartApiService = inject(CartApiService);
+  private readonly checkoutApiService = inject(CheckoutApiService);
   private readonly authStateService = inject(AuthStateService);
   protected readonly currentUser = this.authStateService.user;
 
@@ -96,7 +95,7 @@ export class CheckoutPage {
 
   private readonly cartResource = toSignal(
     toObservable(this.cartReloadTick).pipe(
-      switchMap(() => this.authApiService.getCart()),
+      switchMap(() => this.cartApiService.getCart()),
       tap((response) => {
         this.cartErrorMessage.set(null);
         this.pruneQuantityDrafts(response.data.items);
@@ -137,7 +136,7 @@ export class CheckoutPage {
     this.cartMessage.set(null);
     this.checkoutResult.set(null);
 
-    this.authApiService.updateCartItem(item.itemId, { quantity: parsedQuantity }).subscribe({
+    this.cartApiService.updateCartItem(item.itemId, { quantity: parsedQuantity }).subscribe({
       next: () => {
         this.currentlyUpdatingItemId.set(null);
         this.refreshCart();
@@ -159,7 +158,7 @@ export class CheckoutPage {
     this.cartMessage.set(null);
     this.checkoutResult.set(null);
 
-    this.authApiService.removeCartItem(itemId).subscribe({
+    this.cartApiService.removeCartItem(itemId).subscribe({
       next: () => {
         this.currentlyRemovingItemId.set(null);
         this.refreshCart();
@@ -210,7 +209,7 @@ export class CheckoutPage {
 
     const { paymentMethod, shippingAddress } = this.checkoutForm.getRawValue();
 
-    this.authApiService
+    this.checkoutApiService
       .checkout({
         paymentMethod,
         shippingAddress
@@ -237,7 +236,7 @@ export class CheckoutPage {
   }
 
   protected formatPrice(price: number, currency: string): string {
-    return `${this.numberFormatter.format(price)} ${currency}`;
+    return `${this.numberFormatter.format(price)} ${this.currencyLabel(currency)}`;
   }
 
   protected hasFieldError(field: FormControl<string>): boolean {
@@ -259,6 +258,14 @@ export class CheckoutPage {
     }
 
     return parsed;
+  }
+
+  private currencyLabel(currency: string): string {
+    if (currency === 'GALLEON') {
+      return '🪙 GALLEON';
+    }
+
+    return currency;
   }
 
   private refreshCart(): void {

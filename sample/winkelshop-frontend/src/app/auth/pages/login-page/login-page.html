@@ -1,12 +1,12 @@
 <main class="login-shell" aria-labelledby="login-title">
   <section class="login-card" aria-describedby="login-subline">
-    <p class="kicker">Winkelshop</p>
-    <h1 id="login-title">Anmeldung</h1>
-    <p id="login-subline" class="subline">Melde dich an, um den Shop und Warenkorb zu nutzen.</p>
+    <p class="kicker">✨ Winkelshop</p>
+    <h1 id="login-title">🪄 Magische Anmeldung</h1>
+    <p id="login-subline" class="subline">Melde dich an, um den Shop und Warenkorb zu nutzen. 🌙</p>
 
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <div class="form-field">
-        <label for="email">E-Mail</label>
+        <label for="email">📜 E-Mail</label>
         <input
           id="email"
           type="email"
@@ -21,7 +21,7 @@
       </div>
 
       <div class="form-field">
-        <label for="password">Passwort</label>
+        <label for="password">🔐 Passwort</label>
         <input
           id="password"
           type="password"
@@ -37,9 +37,9 @@
 
       <button type="submit" [disabled]="isSubmitting()" class="submit-button">
         @if (isSubmitting()) {
-          Anmelden...
+          ✨ Anmelden...
         } @else {
-          Anmelden
+          🧙 Anmelden
         }
       </button>
     </form>

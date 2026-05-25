@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { catchError, map, of, tap } from 'rxjs';
 
 import { AuthApiService } from './auth-api.service';
-import type { AuthUser, LoginRequest } from './auth.models';
+import type { AuthUser, LoginRequest } from '../models/auth.models';
 
 const AUTH_SESSION_STORAGE_KEY = 'winkelshop.auth';
 

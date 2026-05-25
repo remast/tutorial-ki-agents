@@ -2,37 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
-export interface Category {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface CategoriesResponse {
-  data: Category[];
-  meta: {
-    count: number;
-  };
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  currency: string;
-  inStock: boolean;
-  stock: number;
-  categoryId: string;
-  imageUrl: string;
-}
-
-export interface ProductPageResponse {
-  content: Product[];
-}
+import type { CategoriesResponse, ProductPageResponse } from '../models/shop.models';
 
 @Injectable({ providedIn: 'root' })
-export class WinkelshopApiService {
+export class ShopApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly apiBaseUrl = '/api';
 

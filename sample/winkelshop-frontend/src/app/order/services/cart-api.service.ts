@@ -1,28 +1,16 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 import type {
   CartAddItemRequest,
   CartResponse,
-  CartUpdateItemRequest,
-  CheckoutRequest,
-  CheckoutResponse,
-  LoginRequest,
-  LoginResponse
-} from './auth.models';
+  CartUpdateItemRequest
+} from '../models/cart.models';
 
 @Injectable({ providedIn: 'root' })
-export class AuthApiService {
+export class CartApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly apiBaseUrl = '/api';
-
-  public login(payload: LoginRequest) {
-    return this.httpClient.post<LoginResponse>(`${this.apiBaseUrl}/auth/login`, payload);
-  }
-
-  public logout() {
-    return this.httpClient.post<void>(`${this.apiBaseUrl}/auth/logout`, {});
-  }
 
   public addCartItem(payload: CartAddItemRequest) {
     return this.httpClient.post<CartResponse>(`${this.apiBaseUrl}/cart/items`, payload);
@@ -38,9 +26,5 @@ export class AuthApiService {
 
   public removeCartItem(itemId: string) {
     return this.httpClient.delete<CartResponse>(`${this.apiBaseUrl}/cart/items/${itemId}`);
-  }
-
-  public checkout(payload: CheckoutRequest) {
-    return this.httpClient.post<CheckoutResponse>(`${this.apiBaseUrl}/checkout`, payload);
   }
 }

@@ -3,16 +3,11 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { catchError, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
 
-import { AuthApiService } from '../auth/auth-api.service';
-import type { CartData } from '../auth/auth.models';
-import { AuthStateService } from '../auth/auth-state.service';
-import {
-  WinkelshopApiService,
-  type Category,
-  type CategoriesResponse,
-  type Product,
-  type ProductPageResponse
-} from './winkelshop-api.service';
+import { AuthStateService } from '../../../auth/services/auth-state.service';
+import type { CartData } from '../../models/cart.models';
+import type { Category, CategoriesResponse, Product, ProductPageResponse } from '../../models/shop.models';
+import { CartApiService } from '../../services/cart-api.service';
+import { ShopApiService } from '../../services/shop-api.service';
 
 const EMPTY_CATEGORIES_RESPONSE: CategoriesResponse = {
   data: [],
@@ -27,9 +22,9 @@ const EMPTY_CATEGORIES_RESPONSE: CategoriesResponse = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WinkelshopPage {
-  private readonly authApiService = inject(AuthApiService);
+  private readonly cartApiService = inject(CartApiService);
   private readonly authStateService = inject(AuthStateService);
-  private readonly winkelshopApiService = inject(WinkelshopApiService);
+  private readonly shopApiService = inject(ShopApiService);
 
   protected readonly selectedCategoryId = signal<string | null>(null);
   protected readonly categoriesErrorMessage = signal<string | null>(null);
@@ -48,7 +43,7 @@ export class WinkelshopPage {
   }
 
   protected readonly categoriesResource = toSignal(
-    this.winkelshopApiService.getCategoriesResponse().pipe(
+    this.shopApiService.getCategoriesResponse().pipe(
       tap(() => this.categoriesErrorMessage.set(null)),
       catchError(() => {
         this.categoriesErrorMessage.set('Kategorien konnten nicht geladen werden.');
@@ -61,7 +56,7 @@ export class WinkelshopPage {
   private readonly productsResponse = toSignal<ProductPageResponse | null>(
     toObservable(this.selectedCategoryId).pipe(
       distinctUntilChanged(),
-      switchMap((categoryId) => this.winkelshopApiService.getProductsResponse(categoryId)),
+      switchMap((categoryId) => this.shopApiService.getProductsResponse(categoryId)),
       map((response) => this.sortProducts(response)),
       tap(() => this.productsErrorMessage.set(null)),
       catchError(() => {
@@ -116,7 +111,7 @@ export class WinkelshopPage {
       return;
     }
 
-    this.authApiService.addCartItem({ productId, quantity: 1 }).subscribe({
+    this.cartApiService.addCartItem({ productId, quantity: 1 }).subscribe({
       next: (response) => {
         this.cartSummary.set(response.data);
         this.cartMessage.set('Artikel wurde in den Warenkorb gelegt.');
@@ -136,7 +131,15 @@ export class WinkelshopPage {
   }
 
   protected formatPrice(price: number, currency: string): string {
-    return `${this.numberFormatter.format(price)} ${currency}`;
+    return `${this.numberFormatter.format(price)} ${this.currencyLabel(currency)}`;
+  }
+
+  private currencyLabel(currency: string): string {
+    if (currency === 'GALLEON') {
+      return '🪙 GALLEON';
+    }
+
+    return currency;
   }
 
   protected productInitial(name: string): string {
@@ -144,7 +147,7 @@ export class WinkelshopPage {
   }
 
   private loadCartSummary(): void {
-    this.authApiService.getCart().subscribe({
+    this.cartApiService.getCart().subscribe({
       next: (response) => {
         this.cartSummary.set(response.data);
       },

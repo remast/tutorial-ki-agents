@@ -3,24 +3,25 @@
 }
 
 .checkout-shell {
-  --paper: #fffaf2;
-  --paper-soft: #fff4e4;
-  --ink-strong: #1d1b16;
-  --ink-muted: #565045;
-  --accent: #005f73;
-  --accent-soft: #d9eef2;
-  --border: #d8cfbf;
-  --warning: #8b1e3f;
-  --success: #256f4f;
+  --paper: #171126;
+  --paper-soft: #231937;
+  --ink-strong: #f1e9d5;
+  --ink-muted: #cdbf9f;
+  --accent: #f6ca52;
+  --accent-soft: #4a360e;
+  --border: #6d5621;
+  --warning: #ff91ae;
+  --success: #8fe2b8;
 
   min-height: 100dvh;
   padding: 2rem 1rem 3rem;
   background:
-    radial-gradient(circle at 15% 12%, #f9dba9 0%, transparent 32%),
-    radial-gradient(circle at 85% 5%, #c7e3ea 0%, transparent 36%),
-    linear-gradient(180deg, #fff7ea 0%, #fffdf9 100%);
+    radial-gradient(circle at 16% 10%, rgb(246 202 82 / 22%) 0%, transparent 34%),
+    radial-gradient(circle at 87% 8%, rgb(132 109 255 / 20%) 0%, transparent 36%),
+    radial-gradient(circle at 50% 118%, rgb(18 13 31 / 75%) 0%, transparent 52%),
+    linear-gradient(170deg, #09070f 0%, #110d1c 52%, #1a1429 100%);
   color: var(--ink-strong);
-  font-family: Georgia, Cambria, 'Times New Roman', serif;
+  font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
 }
 
 .checkout-header {
@@ -39,6 +40,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
+  text-shadow: 0 0 16px rgb(246 202 82 / 32%);
 }
 
 h1 {
@@ -57,8 +59,12 @@ h1 {
   min-width: 16rem;
   border: 1px solid var(--border);
   border-radius: 0.8rem;
-  background: color-mix(in srgb, var(--paper) 88%, white 12%);
-  box-shadow: 0 8px 22px rgb(0 0 0 / 5%);
+  background:
+    linear-gradient(180deg, rgb(246 202 82 / 10%) 0%, transparent 24%),
+    color-mix(in srgb, var(--paper) 93%, black 7%);
+  box-shadow:
+    0 12px 32px rgb(0 0 0 / 36%),
+    0 0 20px rgb(246 202 82 / 12%);
   padding: 0.65rem 0.75rem;
 }
 
@@ -106,7 +112,7 @@ h1 {
 .submit-button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--accent) 45%, white 55%);
+  outline: 3px solid color-mix(in srgb, var(--accent) 70%, white 30%);
   outline-offset: 2px;
 }
 
@@ -120,10 +126,12 @@ select:focus-visible {
 .cart-panel,
 .checkout-panel,
 .message-card {
-  background: color-mix(in srgb, var(--paper) 92%, white 8%);
+  background:
+    linear-gradient(180deg, rgb(246 202 82 / 9%) 0%, transparent 22%),
+    color-mix(in srgb, var(--paper) 94%, black 6%);
   border: 1px solid var(--border);
   border-radius: 0.9rem;
-  box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 34%);
 }
 
 .cart-panel,
@@ -157,7 +165,7 @@ select:focus-visible {
 .cart-item {
   border: 1px solid var(--border);
   border-radius: 0.7rem;
-  background: #ffffff;
+  background: rgb(13 10 23 / 84%);
   padding: 0.8rem;
   display: grid;
   gap: 0.7rem;
@@ -190,7 +198,7 @@ select {
   border: 1px solid var(--border);
   border-radius: 0.55rem;
   padding: 0.5rem 0.62rem;
-  background: #ffffff;
+  background: rgb(12 9 21 / 72%);
   color: var(--ink-strong);
 }
 
@@ -210,9 +218,9 @@ select {
 }
 
 .danger-button {
-  border: 1px solid color-mix(in srgb, var(--warning) 55%, black 45%);
-  background: #fff4f7;
-  color: color-mix(in srgb, var(--warning) 80%, black 20%);
+  border: 1px solid color-mix(in srgb, var(--warning) 55%, #2a1320 45%);
+  background: rgb(76 27 45 / 44%);
+  color: #ffd1df;
 }
 
 .secondary-button:disabled,
@@ -256,12 +264,14 @@ form {
 
 .submit-button {
   border: 1px solid var(--accent);
-  background: var(--accent);
-  color: #ffffff;
+  background: linear-gradient(180deg, #ffe07a 0%, var(--accent) 100%);
+  color: #3e2d08;
+  box-shadow: 0 8px 22px rgb(246 202 82 / 30%);
 }
 
 .submit-button:hover:not(:disabled) {
-  background: #074d5c;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgb(246 202 82 / 40%);
 }
 
 .status-message {
@@ -270,7 +280,7 @@ form {
   border-radius: 0.55rem;
   padding: 0.55rem 0.72rem;
   color: var(--ink-muted);
-  background: #ffffff;
+  background: rgb(12 9 21 / 72%);
 }
 
 .message-card {
@@ -294,12 +304,31 @@ form {
 }
 
 .message-card.error {
-  border-color: color-mix(in srgb, var(--warning) 40%, white 60%);
+  border-color: color-mix(in srgb, var(--warning) 40%, #2a1320 60%);
 }
 
 .message-card.success {
-  border-color: color-mix(in srgb, var(--success) 45%, white 55%);
-  background: color-mix(in srgb, #f4fff8 86%, white 14%);
+  border-color: color-mix(in srgb, var(--success) 45%, #183126 55%);
+  background: rgb(26 56 40 / 44%);
+}
+
+.cart-item,
+.cart-panel,
+.checkout-panel,
+.account-pill {
+  animation: spell-fade 560ms ease-out;
+}
+
+@keyframes spell-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 56rem) {

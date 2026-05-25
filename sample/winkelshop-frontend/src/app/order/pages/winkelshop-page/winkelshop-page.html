@@ -2,9 +2,8 @@
   <header class="winkelshop-header">
     <div class="header-row">
       <div>
-        <p class="shop-kicker">Readonly Demo</p>
-        <h1 id="winkelshop-title">Winkelshop</h1>
-        <p class="shop-subline">Stoebere durch Kategorien und entdecke magische Produkte.</p>
+        <h1 id="winkelshop-title">🧙 Winkelshop</h1>
+        <p class="shop-subline">Entdecke unseren magische Produkte! 🌙</p>
       </div>
 
       @if (currentUser(); as user) {
@@ -12,16 +11,16 @@
           <p class="account-name">{{ user.name }}</p>
           <p class="account-email">{{ user.email }}</p>
           @if (hasCartItems() && cartSummary(); as cart) {
-            <p class="account-cart-total">Warenkorb: {{ formatPrice(cart.totalPrice, cart.currency) }}</p>
+            <p class="account-cart-total">🧺 Warenkorb: {{ formatPrice(cart.totalPrice, cart.currency) }}</p>
           }
-          <a class="checkout-link" routerLink="/checkout">Zum Checkout</a>
-          <button type="button" class="logout-button" (click)="logout()">Logout</button>
+          <a class="checkout-link" routerLink="/checkout">🪄 Zum Checkout</a>
+          <button type="button" class="logout-button" (click)="logout()">🚪 Logout</button>
         </div>
       } @else {
         <div class="account-pill" aria-label="Nicht angemeldet">
-          <p class="account-name">Gastmodus</p>
+          <p class="account-name">🫥 Gastmodus</p>
           <p class="account-email">Produkte ansehen ohne Anmeldung.</p>
-          <a class="login-link" routerLink="/login">Zum Login</a>
+          <a class="login-link" routerLink="/login">🔐 Zum Login</a>
         </div>
       }
     </div>
@@ -29,7 +28,7 @@
 
   @if (combinedErrorMessage(); as errorMessage) {
     <section class="message-card error" aria-live="assertive">
-      <h2>Daten nicht verfuegbar</h2>
+      <h2>⚠️ Daten nicht verfuegbar</h2>
       <p>{{ errorMessage }}</p>
       <p>Pruefe, ob das Backend unter `http://localhost:8080` laeuft.</p>
     </section>
@@ -37,7 +36,7 @@
 
   <section class="winkelshop-layout" aria-label="Produktkatalog">
     <aside class="category-panel" aria-labelledby="category-title">
-      <h2 id="category-title">Kategorien</h2>
+      <h2 id="category-title">📚 Kategorien</h2>
 
       <button
         type="button"
@@ -45,7 +44,7 @@
         [class.active]="selectedCategoryId() === null"
         (click)="showAllCategories()"
       >
-        Alle Kategorien
+        🌌 Alle Kategorien
       </button>
 
       @for (category of categories(); track trackByCategoryId($index, category)) {
@@ -64,7 +63,7 @@
 
     <section class="products-panel" [attr.aria-labelledby]="'products-title'">
       <div class="products-headline">
-        <h2 id="products-title">Produkte</h2>
+        <h2 id="products-title">🧪 Produkte</h2>
         <p>{{ selectedCategoryName() }}</p>
       </div>
 
@@ -94,7 +93,7 @@
                   [disabled]="!product.inStock"
                   (click)="addToCart(product.id)"
                 >
-                  In den Warenkorb
+                    🧺 In den Warenkorb
                 </button>
               </div>
             </li>
@@ -106,7 +105,7 @@
         }
       } @else {
         <div class="message-card" aria-live="polite">
-          <h3>Keine Produkte gefunden</h3>
+          <h3>🔍 Keine Produkte gefunden</h3>
           <p>Fuer diese Kategorie sind aktuell keine Produkte vorhanden.</p>
         </div>
       }
