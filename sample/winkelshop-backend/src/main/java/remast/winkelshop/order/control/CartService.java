@@ -25,7 +25,7 @@ public class CartService {
             throw new RuntimeException("product is out of stock");
         }
 
-        var saved = cartItemRepository.save(new CartItemEntity(
+        return cartItemRepository.save(new CartItemEntity(
                 UUID.randomUUID(),
                 UUID.randomUUID(),
                 userId,
@@ -34,7 +34,6 @@ public class CartService {
                 product.price(),
                 Instant.now()
         ));
-        return saved;
     }
 
     public CartView getCart(UUID userId) {
@@ -53,7 +52,7 @@ public class CartService {
     public CartItemEntity updateItemQuantity(UUID userId, UUID itemId, int quantity) {
         var existing = cartItemRepository.findByUserIdAndItemId(userId, itemId)
                 .orElseThrow();
-        var updated = cartItemRepository.save(new CartItemEntity(
+        return cartItemRepository.save(new CartItemEntity(
                 existing.id(),
                 existing.itemId(),
                 existing.userId(),
@@ -62,7 +61,6 @@ public class CartService {
                 existing.unitPrice(),
                 existing.createdAt()
         ));
-        return updated;
     }
 
     public void removeItem(UUID userId, UUID itemId) {

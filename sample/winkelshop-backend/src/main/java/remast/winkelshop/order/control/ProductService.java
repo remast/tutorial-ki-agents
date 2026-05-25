@@ -18,16 +18,35 @@ public class ProductService {
 
     public PagedResponse<ProductEntity> searchProducts(int page,
                                                        int size) {
-        var safePage = Math.max(page, 0);
-        var safeSize = Math.max(size, 1);
-        var pageRequest = PageRequest.of(safePage, safeSize, Sort.by("name").ascending());
-        var result = productRepository.findAll(pageRequest);
+        var result = productRepository.findAll(createPageRequest(page, size));
+        return toPagedResponse(result.getContent(), page, size, result.getTotalElements());
+    }
 
-        return PagedResponse.fromContentAndTotal(result.getContent(), safePage, safeSize, result.getTotalElements());
+    public PagedResponse<ProductEntity> getProductsByCategory(UUID categoryId,
+                                                              int page,
+                                                              int size) {
+        var result = productRepository.findByCategoryId(categoryId, createPageRequest(page, size));
+        return toPagedResponse(result.getContent(), page, size, result.getTotalElements());
     }
 
     public ProductEntity getProduct(UUID productId) {
         return productRepository.findById(productId)
                 .orElseThrow();
+    }
+
+    private static PageRequest createPageRequest(int page,
+                                                 int size) {
+        var safePage = Math.max(page, 0);
+        var safeSize = Math.max(size, 1);
+        return PageRequest.of(safePage, safeSize, Sort.by("name").ascending());
+    }
+
+    private static PagedResponse<ProductEntity> toPagedResponse(java.util.List<ProductEntity> content,
+                                                                int page,
+                                                                int size,
+                                                                long totalElements) {
+        var safePage = Math.max(page, 0);
+        var safeSize = Math.max(size, 1);
+        return PagedResponse.fromContentAndTotal(content, safePage, safeSize, totalElements);
     }
 }
