@@ -36,6 +36,7 @@ export interface CartItem {
 export interface CartData {
   items: CartItem[];
   currency: string;
+  totalPrice: number;
 }
 
 export interface CartResponse {

@@ -80,6 +80,16 @@ h1 {
   font-size: 0.9rem;
 }
 
+.account-cart-total {
+  margin: 0.45rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  background: #ffffff;
+  color: var(--ink-strong);
+  font-weight: 700;
+  padding: 0.35rem 0.5rem;
+}
+
 .logout-button {
   margin-top: 0.6rem;
   border: 1px solid var(--accent);

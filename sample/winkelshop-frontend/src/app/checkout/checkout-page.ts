@@ -28,7 +28,8 @@ interface CheckoutFormModel {
 const EMPTY_CART_RESPONSE: CartResponse = {
   data: {
     items: [],
-    currency: 'GALLEON'
+    currency: 'GALLEON',
+    totalPrice: 0
   }
 };
 
@@ -111,9 +112,6 @@ export class CheckoutPage {
   protected readonly cart = computed(() => this.cartResource().data);
   protected readonly cartItems = computed(() => this.cart().items);
   protected readonly hasCartItems = computed(() => this.cartItems().length > 0);
-  protected readonly cartTotal = computed(() => {
-    return this.cartItems().reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
-  });
 
   protected readonly shippingAddressForm = computed(() => this.checkoutForm.controls.shippingAddress);
 

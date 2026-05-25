@@ -207,6 +207,7 @@ Accept: application/json
 {
   "data": {
     "items": [],
+    "totalPrice": 10.0
     "currency": "GALLEON"
   }
 }

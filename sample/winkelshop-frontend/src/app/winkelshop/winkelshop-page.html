@@ -11,6 +11,9 @@
         <div class="account-pill" aria-label="Angemeldetes Konto">
           <p class="account-name">{{ user.name }}</p>
           <p class="account-email">{{ user.email }}</p>
+          @if (hasCartItems() && cartSummary(); as cart) {
+            <p class="account-cart-total">Warenkorb: {{ formatPrice(cart.totalPrice, cart.currency) }}</p>
+          }
           <a class="checkout-link" routerLink="/checkout">Zum Checkout</a>
           <button type="button" class="logout-button" (click)="logout()">Logout</button>
         </div>

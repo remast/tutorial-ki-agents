@@ -1,6 +1,7 @@
 package remast.winkelshop.order.control;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.stereotype.Service;
 import remast.winkelshop.order.entity.Cart;
 import remast.winkelshop.order.entity.CartItemEntity;
@@ -18,6 +19,7 @@ public class CartService {
 
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
+    private final JdbcAggregateTemplate jdbcAggregateTemplate;
 
     public CartItemEntity addItem(UUID userId, UUID productId, int quantity) {
         var product = productRepository.findById(productId)
@@ -26,7 +28,7 @@ public class CartService {
             throw new RuntimeException("product is out of stock");
         }
 
-        return cartItemRepository.save(new CartItemEntity(
+        return jdbcAggregateTemplate.insert(new CartItemEntity(
                 UUID.randomUUID(),
                 UUID.randomUUID(),
                 userId,

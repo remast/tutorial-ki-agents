@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { catchError, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
 
 import { AuthApiService } from '../auth/auth-api.service';
+import type { CartData } from '../auth/auth.models';
 import { AuthStateService } from '../auth/auth-state.service';
 import {
   WinkelshopApiService,
@@ -35,9 +36,15 @@ export class WinkelshopPage {
   protected readonly productsErrorMessage = signal<string | null>(null);
   protected readonly cartMessage = signal<string | null>(null);
   protected readonly currentUser = this.authStateService.user;
+  protected readonly cartSummary = signal<CartData | null>(null);
+  protected readonly hasCartItems = computed(() => (this.cartSummary()?.items.length ?? 0) > 0);
 
   constructor() {
     this.authStateService.restoreSession();
+
+    if (this.authStateService.isAuthenticated()) {
+      this.loadCartSummary();
+    }
   }
 
   protected readonly categoriesResource = toSignal(
@@ -99,6 +106,7 @@ export class WinkelshopPage {
   }
 
   protected logout(): void {
+    this.cartSummary.set(null);
     this.authStateService.logout().subscribe();
   }
 
@@ -109,7 +117,8 @@ export class WinkelshopPage {
     }
 
     this.authApiService.addCartItem({ productId, quantity: 1 }).subscribe({
-      next: () => {
+      next: (response) => {
+        this.cartSummary.set(response.data);
         this.cartMessage.set('Artikel wurde in den Warenkorb gelegt.');
       },
       error: () => {
@@ -132,6 +141,17 @@ export class WinkelshopPage {
 
   protected productInitial(name: string): string {
     return name.slice(0, 1).toUpperCase();
+  }
+
+  private loadCartSummary(): void {
+    this.authApiService.getCart().subscribe({
+      next: (response) => {
+        this.cartSummary.set(response.data);
+      },
+      error: () => {
+        this.cartSummary.set(null);
+      }
+    });
   }
 
   private sortProducts(response: ProductPageResponse): ProductPageResponse {

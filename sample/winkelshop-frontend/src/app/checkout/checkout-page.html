@@ -84,7 +84,7 @@
 
         <div class="cart-total">
           <span>Gesamtsumme</span>
-          <strong>{{ formatPrice(cartTotal(), cart().currency) }}</strong>
+          <strong>{{ formatPrice(cart().totalPrice, cart().currency) }}</strong>
         </div>
       } @else {
         <div class="message-card inline" aria-live="polite">
