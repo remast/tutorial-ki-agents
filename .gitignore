@@ -3,3 +3,4 @@ coverage
 .vscode
 .parcel-cache
 dist
+.idea

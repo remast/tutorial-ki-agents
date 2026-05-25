@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: winkelshop
+  docker:
+    compose:
+      enabled: false
