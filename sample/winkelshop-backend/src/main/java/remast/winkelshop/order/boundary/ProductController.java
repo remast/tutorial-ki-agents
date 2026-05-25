@@ -19,24 +19,11 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public PagedResponse<ProductListItem> searchProducts(
-            @RequestParam(required = false) String search,
-            @RequestParam(required = false) UUID category,
-            @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice,
-            @RequestParam(required = false) Boolean inStock,
+    public PagedResponse<ProductEntity> searchProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        return productService.searchProducts(search, category, minPrice, maxPrice, inStock, page, size)
-                .map(product -> new ProductListItem(
-                        product.id(),
-                        product.name(),
-                        product.price(),
-                        product.currency(),
-                        product.inStock(),
-                        product.categoryId()
-                ));
+        return productService.searchProducts(page, size);
     }
 
     @GetMapping("/{productId}")
@@ -44,13 +31,4 @@ public class ProductController {
         return new DataResponse<>(productService.getProduct(productId));
     }
 
-    public record ProductListItem(
-            UUID id,
-            String name,
-            double price,
-            String currency,
-            boolean inStock,
-            UUID categoryId
-    ) {
-    }
 }
