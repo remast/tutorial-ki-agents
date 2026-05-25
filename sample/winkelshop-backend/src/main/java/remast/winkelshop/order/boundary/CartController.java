@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import remast.winkelshop.order.control.CartService;
 import remast.winkelshop.order.entity.Cart;
-import remast.winkelshop.order.entity.CartItemEntity;
 import remast.winkelshop.auth.boundary.User;
 
 import java.util.UUID;
@@ -29,10 +28,10 @@ public class CartController {
 
     @PostMapping("/items")
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse<CartItemEntity> addItem(User user,
-                                                @Valid @RequestBody AddCartItemRequest request) {
-        var item = cartService.addItem(user.userId(), request.productId(), request.quantity());
-        return new DataResponse<>(item);
+    public DataResponse<Cart> addItem(User user,
+                                      @Valid @RequestBody AddCartItemRequest request) {
+        cartService.addItem(user.userId(), request.productId(), request.quantity());
+        return new DataResponse<>(cartService.getCart(user.userId()));
     }
 
     @GetMapping
@@ -41,17 +40,17 @@ public class CartController {
     }
 
     @PatchMapping("/items/{itemId}")
-    public DataResponse<CartItemEntity> updateItem(User user,
-                                                   @PathVariable UUID itemId,
-                                                   @Valid @RequestBody UpdateCartItemRequest request) {
-        var item = cartService.updateItemQuantity(user.userId(), itemId, request.quantity());
-        return new DataResponse<>(item);
+    public DataResponse<Cart> updateItem(User user,
+                                         @PathVariable UUID itemId,
+                                         @Valid @RequestBody UpdateCartItemRequest request) {
+        cartService.updateItemQuantity(user.userId(), itemId, request.quantity());
+        return new DataResponse<>(cartService.getCart(user.userId()));
     }
 
     @DeleteMapping("/items/{itemId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteItem(User user, @PathVariable UUID itemId) {
+    public DataResponse<Cart> deleteItem(User user, @PathVariable UUID itemId) {
         cartService.removeItem(user.userId(), itemId);
+        return new DataResponse<>(cartService.getCart(user.userId()));
     }
 
     public record AddCartItemRequest(UUID productId, @Min(1) int quantity) {
