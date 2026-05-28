@@ -1,0 +1,1 @@
+mv ~/.config/opencode/opencode.json ~/.config/opencode/backup_opencode.json
