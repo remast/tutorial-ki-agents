@@ -28,7 +28,7 @@
       </section>
       <section>
         <section>
-          <h2>Lesson 1</h2>
+          <h2>Mit KI Agenten und Terminal entwickeln</h2>
         </section>
         <section>
           <h2>Die 3 Stufen des KI Coding</h2>
@@ -49,6 +49,8 @@
               <ul>
                 <li class="fragment">handelt eigenständig</li>
                 <li class="fragment">nutzt Werkzeuge</li>
+                <li class="fragment">nutzt Tools</li>
+                <li class="fragment">nutzt Dokumentation</li>
               </ul>
             </div>
           </div>
@@ -68,10 +70,75 @@
         </section>
         <section data-background-iframe="https://opencode.ai/">
         </section>
+        <section>
+          <h2>Sessions kennenlernen</h2>
+          <ul>
+            <li class="fragment">Session = Unterhaltung</li>
+            <li class="fragment">Wissen bleibt erhalten</li>
+            <li class="fragment">große Session = viele Token</li>
+            <li class="fragment">eine Aufgabe, eine Session</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Subagenten kennenlernen</h2>
+          <ul>
+            <li class="fragment"><code>explore</code> Subagent erkundet</li>
+            <li class="fragment"><code>general</code> Suagent für allgemeine Aufgaben</li>
+            <li class="fragment">Nur Ergebnis landet in Session</li>
+          </ul>
+        </section>
+
       </section>
       <section>
         <section>
           <h2>Lesson 2</h2>
+        </section>
+        <section>
+          <h2>Mit Spezifikation und KI umsetzen</h2>
+          <img src="./themes/spec-flow.png" />
+        </section>
+        <section>
+          <h2>Specification vs. Anforderung</h2>
+          <ul>
+            <li class="fragment">Anforderung für Menschen</li>
+            <li class="fragment">Specification für KI-Agenten</li>
+            <li class="fragment">Code Referenzen, Beispiele</li>
+          </ul>
+        </section>
+        <section>
+          <h2>3 Spec Driven Ansätze</h2>
+          <ul>
+            <li class="fragment">Plan/Build</li>
+            <li class="fragment">Terminal wie <a href="">Github SpecKit</a></li>
+            <li class="fragment">MCP wie <a href="https://codemcp.github.io/workflows/"">Responsible Vibe MCP</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Spec für Frontend</h2>
+   <section>
+  <pre><code data-trim data-noescape class="language-md" style="font-size: 85%;">
+# Feature: Push einer einzelnen Policy kann manuell ausgelöst werden
+
+Füge einen Button auf der Policen-Seite hinzu, um diese einzelne Police 
+an den Schaden Service zu übertragen. 
+
+Der Policy-Push kann mit einer Policen-Nummer (z.B. AXG0F) 
+ausgelöst werden und gibt HTTP-Status 200 zurück, wenn erfolgreich. 
+
+Bei erfolgreichem Push wird der Benutzer mit einer 
+Growl-Benachrichtigung informiert.
+
+## Request
+POST http://localhost:9090/api/v1/claim-info/policy/AXG0F/push
+
+## Response
+HTTP/1.1 200 
+
+[Response body is empty]
+
+Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
+  </code></pre>
+</section>
         </section>
       </section>
     </div>
