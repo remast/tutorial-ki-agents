@@ -115,7 +115,7 @@
             </ul>
         </section>
         <section>
-          <h2>Spec für Frontend</h2>
+          <h2>Spezifikation für Frontend</h2>
           <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
 # Feature: Push einer einzelnen Police kann manuell ausgelöst werden
 
@@ -140,15 +140,6 @@ Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
   </code></pre>
           </section>
           <section>
-            <h2>Spezifikation vs. Anforderung</h2>
-            <ul>
-              <li class="fragment">Anforderung für Menschen</li>
-              <li class="fragment">Spezifikation für KI-Agenten</li>
-              <li class="fragment">Code Referenzen, Beispiele</li>
-              <li class="fragment">Prompt oder Markdown Format</li>
-            </ul>
-          </section>
-          <section>
             <h2>Feature mit Plan/Build umsetzen</h2>
             <ol>
               <li class="fragment">📄 Feature Spezifikation erstellen</li>
@@ -156,6 +147,82 @@ Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
               <li class="fragment">👷‍♂️ Implementieren gemäß Plan im <code>Build</code> Modus</li>
             </ol>
           </section>
+          <section>
+            <h2>Großes Feature: Admin Bereich 🚧</h2>
+            <ul>
+              <li class="fragment">Verwalten der Produkte und Kategorien</li>
+              <li class="fragment">neue Admin Rolle</li>
+              <li class="fragment">Admin Bereich im Frontend</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Den Kontext mit MCP, Skills und Dateien erweitern</h2>
+          </section>
+        <section>
+          <h2>Das Context Window einer KI</h2>
+          <ul>
+            <li class="fragment">Context Window ist Wissen der KI</li>
+            <li class="fragment">alles außerhalb ist nicht bekannt</li>
+            <li class="fragment">besteht aus Tokens (1 Token ca. 0,75 Wörter)</li>
+            <li class="fragment">jede Session hat eigenes Context Window</li>
+          </ul>
+          <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
+[System-Prompt] + [Chatverlauf] + [Tool-Aufruf] + [Deine Frage]
+       ↑                ↑               ↑                ↑     
+       └──────────────────── Context Window ──────────────────┘
+  </code></pre>
+          </section>
+        <section>
+          <h2>Tool und Context Window</h2>
+          <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
+User:      "Wie wird das Wetter morgen in Hamburg?"
+
+Modell:    → ruft Tool auf:
+           { tool: "weather_fetch",
+             input: { city: "Hamburg", date: "morgen" } }
+
+Tool:      → gibt zurück:
+           { temp: "18°C", rain: "30%", wind: "15 km/h" }
+
+Modell:    → liest Ergebnis & antwortet:
+           "Morgen in Hamburg: 18°C, leichter Regen möglich."
+  </code></pre>
+          </section>
+          <section>
+            <h2>Praxis Tipps für Context Window</h2>
+            <ul>
+              <li class="fragment">Achtung, vor großem Context Window</li>
+              <li class="fragment">Vorsicht bei Tools und Dateien</li>
+              <li class="fragment">Session ggf. komprimieren mit <code>/compact</code></li>
+              <li class="fragment">versch. KI-Modelle unterstützen versch. Window Größen (GPT-3.5 16k Tokens, Gemini 1.5 Pro 1.5 Mio Tokens)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Die ideale Agents.md für Dein Projekt</h2>
+          </section>
+          <section>
+            <h2>Projekt Wissen in Agents.md</h2>
+            <ul>
+              <li class="fragment">Coding Agents lesen <code>AGENTS.md</code></li>
+              <li class="fragment">offener, etablierter Standard</li>
+              <li class="fragment">mehrere Agents.md in versch. Verzeichnissen</li>
+              <li class="fragment">intiales Setup mit <code>/init</code></li>
+            </ul>            
+          </section>
+          <section data-background-iframe="https://agents.md/">
+          </section>
+          <section>
+            <h2>In die Agents.md gehört</h2>
+            <ul>
+              <li class="fragment">Wichtige Befehle (<code>npm run dev</code>)</li>
+              <li class="fragment">Code-Konventionen</li>
+              <li class="fragment">Architektur-Vorgaben</li>
+              <li class="fragment">Test-Hinweise</li>
+            </ul>            
+         </section>
+
         </section>
     </div>
   </div>
