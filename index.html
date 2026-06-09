@@ -138,28 +138,28 @@ HTTP/1.1 200
 
 Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
   </code></pre>
-          </section>
-          <section>
-            <h2>Feature mit Plan/Build umsetzen</h2>
-            <ol>
-              <li class="fragment">📄 Feature Spezifikation erstellen</li>
-              <li class="fragment">📋 Planen der Umsetzung im <code>Plan</code> Modus</li>
-              <li class="fragment">👷‍♂️ Implementieren gemäß Plan im <code>Build</code> Modus</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Großes Feature: Admin Bereich 🚧</h2>
-            <ul>
-              <li class="fragment">Verwalten der Produkte und Kategorien</li>
-              <li class="fragment">neue Admin Rolle</li>
-              <li class="fragment">Admin Bereich im Frontend</li>
-            </ul>
-          </section>
         </section>
         <section>
-          <section>
-            <h2>Den Kontext mit MCP, Skills und Dateien erweitern</h2>
-          </section>
+          <h2>Feature mit Plan/Build umsetzen</h2>
+          <ol>
+            <li class="fragment">📄 Feature Spezifikation erstellen</li>
+            <li class="fragment">📋 Planen der Umsetzung im <code>Plan</code> Modus</li>
+            <li class="fragment">👷‍♂️ Implementieren gemäß Plan im <code>Build</code> Modus</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Großes Feature: Admin Bereich 🚧</h2>
+          <ul>
+            <li class="fragment">Verwalten der Produkte und Kategorien</li>
+            <li class="fragment">neue Admin Rolle</li>
+            <li class="fragment">Admin Bereich im Frontend</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Den Kontext mit MCP, Skills und Dateien erweitern</h2>
+        </section>
         <section>
           <h2>Das Context Window einer KI</h2>
           <ul>
@@ -171,9 +171,9 @@ Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
           <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
 [System-Prompt] + [Chatverlauf] + [Tool-Aufruf] + [Deine Frage]
        ↑                ↑               ↑                ↑     
-       └──────────────────── Context Window ──────────────────┘
+       └──────────────────── Context Window ─────────────┘
   </code></pre>
-          </section>
+        </section>
         <section>
           <h2>Tool und Context Window</h2>
           <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
@@ -189,42 +189,43 @@ Tool:      → gibt zurück:
 Modell:    → liest Ergebnis & antwortet:
            "Morgen in Hamburg: 18°C, leichter Regen möglich."
   </code></pre>
-          </section>
-          <section>
-            <h2>Praxis Tipps für Context Window</h2>
-            <ul>
-              <li class="fragment">Achtung, vor großem Context Window</li>
-              <li class="fragment">Vorsicht bei Tools und Dateien</li>
-              <li class="fragment">Session ggf. komprimieren mit <code>/compact</code></li>
-              <li class="fragment">versch. KI-Modelle unterstützen versch. Window Größen (GPT-3.5 16k Tokens, Gemini 1.5 Pro 1.5 Mio Tokens)</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Die ideale Agents.md für Dein Projekt</h2>
-          </section>
-          <section>
-            <h2>Projekt Wissen in Agents.md</h2>
-            <ul>
-              <li class="fragment">Coding Agents lesen <code>AGENTS.md</code></li>
-              <li class="fragment">offener, etablierter Standard</li>
-              <li class="fragment">mehrere Agents.md in versch. Verzeichnissen</li>
-              <li class="fragment">intiales Setup mit <code>/init</code></li>
-            </ul>            
-          </section>
-          <section data-background-iframe="https://agents.md/">
-          </section>
-          <section>
-            <h2>In die Agents.md gehört</h2>
-            <ul>
-              <li class="fragment">Wichtige Befehle (<code>npm run dev</code>)</li>
-              <li class="fragment">Code-Konventionen</li>
-              <li class="fragment">Architektur-Vorgaben</li>
-              <li class="fragment">Test-Hinweise</li>
-            </ul>            
-         </section>
-          <section>
-            <h2>Tools per Model-Context-Protocol (MCP) integrieren</h2>
-          </section>
+        </section>
+        <section>
+          <h2>Praxis Tipps für Context Window</h2>
+          <ul>
+            <li class="fragment">Achtung, vor großem Context Window</li>
+            <li class="fragment">Vorsicht bei Tools und Dateien</li>
+            <li class="fragment">Session ggf. komprimieren mit <code>/compact</code></li>
+            <li class="fragment">versch. KI-Modelle unterstützen versch. Window Größen (GPT-3.5 16k Tokens, Gemini 1.5
+              Pro 1.5 Mio Tokens)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Die ideale Agents.md für Dein Projekt</h2>
+        </section>
+        <section>
+          <h2>Projekt Wissen in Agents.md</h2>
+          <ul>
+            <li class="fragment">Coding Agents lesen <code>AGENTS.md</code></li>
+            <li class="fragment">offener, etablierter Standard</li>
+            <li class="fragment">mehrere Agents.md in versch. Verzeichnissen</li>
+            <li class="fragment">intiales Setup mit <code>/init</code></li>
+          </ul>
+        </section>
+        <section data-background-iframe="https://agents.md/">
+        </section>
+        <section>
+          <h2>In die Agents.md gehört</h2>
+          <ul>
+            <li class="fragment">Wichtige Befehle (<code>npm run dev</code>)</li>
+            <li class="fragment">Code-Konventionen</li>
+            <li class="fragment">Architektur-Vorgaben</li>
+            <li class="fragment">Test-Hinweise</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Tools per MCP <br />(Model-Context-Protocol) integrieren</h2>
+        </section>
         <section>
           <h2>Wie MCP funktioniert</h2>
           <img class="fragment" src="./themes/how-mcp-works.png" />
@@ -242,16 +243,102 @@ Modell:    → liest Ergebnis & antwortet:
             </tr>
             <tr>
               <td><code>list_objects</code></td>
-              <td>Ermittelt Tabellen, Views, Sequences, ...</td>
+              <td>Ermittelt Tabellen, Views, Sequences der DB</td>
             </tr>
             <tr>
               <td><code>execute_sql</code></td>
-              <td>Führt SQL Abfragen aus</td>
+              <td>Führt SQL Queries aus</td>
             </tr>
           </table>
         </section>
-
+        <section>
+          <h2>🧑‍🔬 Skills nutzen</h2>
+          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen das bei Bedarf aktiviert wird</b>
         </section>
+        <section data-background-image="themes/skills_sh.png">
+        </section>
+        <section>
+          <h2>Skills nutzen</h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Dein maßgeschneiderter <br/> KI Agent</h2>
+        </section>
+        <section>
+          <h2>Commands, Skills und Agenten im Überblick</h2>
+        </section>
+        <section>
+          <h2>💬 Das ist ein Command</h2>
+          <b class="fragment"><span class="cross-blue">Command</span> = Prompt Vorlage</b>
+          <p class="fragment">👉 Aufruf mit <code>/my-command</code></p>
+        </section>
+        <section>
+          <h2>🧑‍🔬 Das ist ein Skill</h2>
+          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen das bei Bedarf aktiviert wird</b>
+          <p class="fragment">👉 Aktivierung und Aufruf durch Agent</p>
+        </section>
+        <section>
+          <h2>🤖 Das ist ein Agent</h2>
+          <p class="fragment"><span class="cross-red">Agent</span> = erledigt Aufgabe in eigenem Kontext</p>
+          <ul>
+            <li class="fragment">👉 Aufruf in Prompt <br /> <code style="font-size: 80%;">"Prüfe die Änderungen mit @review Agent"</code></li>
+            <li class="fragment">eigene Berechtigungen (nur lesen)</li>
+            <li class="fragment">eigenes KI-Modell und Kontext</li>
+          </ul>
+          <p class="fragment"></p>
+        </section>
+        <section>
+          <h2>Commands, Skills und Agenten</h2>
+          <table style="font-size: 60%;">
+            <tr class="cross-blue">
+              <th></th>
+              <th>💬 <span class="cross-blue">Command</span></th>
+              <th style="background-color: rgba(255, 255, 255, 0.15);">🧑‍🔬 <span class="cross-yellow">Skill</span>
+              </th>
+              <th>🤖 <span class="cross-red">Agent</span></th>
+            </tr>
+            <tr>
+              <td style="color: rgba(255, 255, 255, 0.4);">Was?</td>
+              <td>Prompt Vorlage</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">Wissen das bei Bedarf aktiviert wird</td>
+              <td>Unter-Session für eigene Aufgabe</td>
+            </tr>
+            <tr>
+              <td style="color: rgba(255, 255, 255, 0.4);">Wie aufrufen?</td>
+              <td>Du (manuell <code>/cmd</code>)</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">Der Agent selbst </td>
+              <td>Der Agent selbst oder Du via <code>@</code></td>
+            </tr>
+            <tr>
+              <td style="color: rgba(255, 255, 255, 0.4);">Kontext</td>
+              <td>im aktuellen Kontext</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">im aktuellen Kontext</td>
+              <td>eigener isolierter Kontext</td>
+            </tr>
+            <tr>
+              <td style="color: rgba(255, 255, 255, 0.4);">KI-Modell</td>
+              <td>aktuelles Modell</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">aktuelles Modell</td>
+              <td>eigenes Modell möglich</td>
+            </tr>
+            <tr>
+              <td style="color: rgba(255, 255, 255, 0.4);">Berechtigungen</td>
+              <td>wie aktueller Agent</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">wie aktueller Agent</td>
+              <td>eigene, konfigurierbare Berechtigungen</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Faustregel für <br/> Commands, Skills und Agenten</h2>
+          <ul style="font-size: 100%;">
+            <li class="fragment">Wiederkehrender Auftrag → 💬 <span class="cross-blue">Command</span></li>
+            <li class="fragment">Wiederverwendbares Know-How → 🧑‍🔬 <span class="cross-yellow">Skill</span></li>
+            <li class="fragment">Isolierte Arbeit mit eigenen Rechten → 🤖 <span class="cross-red">Agent</span></li>
+          </ul>
+        </section>
+      </section>
     </div>
   </div>
 
