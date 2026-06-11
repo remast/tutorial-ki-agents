@@ -266,7 +266,10 @@ Modell:    → liest Ergebnis & antwortet:
           <h2>Dein maßgeschneiderter <br/> KI Agent</h2>
         </section>
         <section>
-          <h2>Commands, Skills und Agenten im Überblick</h2>
+          <img src="themes/ki-agent-custom-tailored.png"/>
+        </section>
+        <section>
+          <h2>Commands, Skills und Agenten</h2>
         </section>
         <section>
           <h2>💬 Das ist ein Command</h2>
@@ -290,7 +293,7 @@ Modell:    → liest Ergebnis & antwortet:
         </section>
         <section>
           <h2>Commands, Skills und Agenten</h2>
-          <table style="font-size: 60%;">
+          <table class="fragment" style="font-size: 60%;">
             <tr class="cross-blue">
               <th></th>
               <th>💬 <span class="cross-blue">Command</span></th>
@@ -337,6 +340,45 @@ Modell:    → liest Ergebnis & antwortet:
             <li class="fragment">Wiederverwendbares Know-How → 🧑‍🔬 <span class="cross-yellow">Skill</span></li>
             <li class="fragment">Isolierte Arbeit mit eigenen Rechten → 🤖 <span class="cross-red">Agent</span></li>
           </ul>
+        </section>
+        <section>
+          <h2>Sicher Opencode einsetzen</h2>
+        </section>
+        <section>
+          <h2>Sicher Opencode einsetzen</h2>
+          <ul>
+            <li class="fragment">Agent hat Zugriff auf dein Dateisystem, Terminal</li>
+            <li class="fragment">Agent kann Code ausführen, Dateien löschen, Commits machen</li>
+            <li class="fragment">Agent nutzt Credentials und Umgebungsvariablen</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Was kann schief gehen?</h2>
+          <table style="font-size: 65%;">
+            <tr class="fragment">
+              <td class="cross-red">💣 Datenleck</td>
+              <td>Sensible Informationen im LLM Kontext</td>
+            </tr>
+            <tr class="fragment">
+              <td class="cross-red">💣 Prompt Injection</td>
+              <td>Versteckte bösartige Anweisungen in Prompts</td>
+            </tr>
+            <tr class="fragment">
+              <td class="cross-red">💣 Böse Supply Chain</td>
+              <td>Agent installiert schadhafte NPM/pip-Pakete</td>
+            </tr>
+            <tr class="fragment">
+              <td class="cross-red">💣 Böse Skills/MCP-Server</td>
+              <td>Skills oder MCP-Server nutzen Prompt Injection</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2 class="cross-yellow">Minimale Rechte <br/> für maximale Produktivität</h2>
+          <div style="text-align: left; padding-left: 2em;">
+            <p class="fragment">🧐 Agenten Berechtigungen prüfen und regeln</p>
+            <p class="fragment">🏖️ Sandbox für Agent statt Vollzugriff (Docker )</p>
+          </div>
         </section>
       </section>
     </div>
