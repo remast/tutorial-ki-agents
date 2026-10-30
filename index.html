@@ -31,11 +31,13 @@
           <h2>Mit KI Agenten und Terminal entwickeln</h2>
         </section>
         <section>
-          <h2>Die 3 Stufen des KI Coding</h2>
+          <h2>Die 4 Stufen des KI Coding</h2>
           <ol>
-            <li class="fragment"><b>Chat GPT</b> <br /> KI-Tools erzeugen Code-Schnipsel</li>
-            <li class="fragment"><b>Code Chat</b> <br /> Chat Konversation mit KI über das Projekt</li>
-            <li class="fragment"><b>KI-Agenten</b> <br /> Entwicklungs Aufgaben an eigenständige KI-Agenten delegieren
+            <li class="fragment"><b>Chat GPT</b> <br /> <span style="font-size: 80%">KI-Tools erzeugen Code-Schnipsel</span></li>
+            <li class="fragment"><b>Code Chat</b> <br /> <span style="font-size: 80%">Chat Konversation mit KI über das Projekt</span></li>
+            <li class="fragment"><b>KI-Agenten</b> <br /> <span style="font-size: 80%">Aufgabe an KI-Agenten delegieren, Ergebnis manuell prüfen</span>
+            </li>
+            <li class="fragment"><b>Loop Engineering</b> <br /> <span style="font-size: 80%">Tests und Feedback aufsetzen, Agenten prüfen ihre Ergebnisse selbst</span>
             </li>
           </ol>
         </section>
@@ -83,7 +85,7 @@
           <h2>Subagenten kennenlernen</h2>
           <ul>
             <li class="fragment"><code>explore</code> Subagent erkundet</li>
-            <li class="fragment"><code>general</code> Suagent für allgemeine Aufgaben</li>
+            <li class="fragment"><code>general</code> Subagent für allgemeine Aufgaben</li>
             <li class="fragment">Nur Ergebnis landet in Session</li>
           </ul>
         </section>
@@ -102,7 +104,7 @@
           <ol>
             <li class="fragment">Plan/Build im Tool (IDE/Terminal) ✨</li>
             <li class="fragment">extra Tools wie <a href="https://github.github.com/spec-kit/">Github SpecKit</a></li>
-            <li class="fragment">MCP wie <a href="https://codemcp.github.io/workflows/"">Responsible Vibe MCP</a></li>
+            <li class="fragment">MCP wie <a href="https://codemcp.github.io/workflows/">Responsible Vibe MCP</a></li>
           </ol>
         </section>
         <section>
@@ -253,7 +255,7 @@ Modell:    → liest Ergebnis & antwortet:
         </section>
         <section>
           <h2>🧑‍🔬 Skills nutzen</h2>
-          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen das bei Bedarf aktiviert wird</b>
+          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen, das bei Bedarf aktiviert wird</b>
         </section>
         <section data-background-image="themes/skills_sh.png">
         </section>
@@ -278,7 +280,7 @@ Modell:    → liest Ergebnis & antwortet:
         </section>
         <section>
           <h2>🧑‍🔬 Das ist ein Skill</h2>
-          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen das bei Bedarf aktiviert wird</b>
+          <b class="fragment"><span class="cross-yellow">Skill</span> = Wissen, das bei Bedarf aktiviert wird</b>
           <p class="fragment">👉 Aktivierung und Aufruf durch Agent</p>
         </section>
         <section>
@@ -288,8 +290,8 @@ Modell:    → liest Ergebnis & antwortet:
             <li class="fragment">👉 Aufruf in Prompt <br /> <code style="font-size: 80%;">"Prüfe die Änderungen mit @review Agent"</code></li>
             <li class="fragment">eigene Berechtigungen (nur lesen)</li>
             <li class="fragment">eigenes KI-Modell und Kontext</li>
+            <li class="fragment">🔁 Review-Agent als Prüfinstanz in der Schleife (Loop Engineering)</li>
           </ul>
-          <p class="fragment"></p>
         </section>
         <section>
           <h2>Commands, Skills und Agenten</h2>
@@ -304,7 +306,7 @@ Modell:    → liest Ergebnis & antwortet:
             <tr>
               <td style="color: rgba(255, 255, 255, 0.4);">Was?</td>
               <td>Prompt Vorlage</td>
-              <td style="background-color: rgba(255, 255, 255, 0.15);">Wissen das bei Bedarf aktiviert wird</td>
+              <td style="background-color: rgba(255, 255, 255, 0.15);">Wissen, das bei Bedarf aktiviert wird</td>
               <td>Unter-Session für eigene Aufgabe</td>
             </tr>
             <tr>
@@ -341,6 +343,8 @@ Modell:    → liest Ergebnis & antwortet:
             <li class="fragment">Isolierte Arbeit mit eigenen Rechten → 🤖 <span class="cross-red">Agent</span></li>
           </ul>
         </section>
+      </section>
+      <section>
         <section>
           <h2>Sicher Opencode einsetzen</h2>
         </section>
