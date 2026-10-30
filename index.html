@@ -33,11 +33,13 @@
             <tr><td>09:00 - 09:15</td><td>👨‍🏫 Vorstellung und Begrüßung</td></tr>
             <tr><td>09:15 - 09:30</td><td>👨‍🏫 Einführung Mit KI und Agenten entwickeln</td></tr>
             <tr><td>09:30 - 10:00</td><td>🏋️ Erste Schritte mit OpenCode</td></tr>
-            <tr><td>10:00 - 10:15</td><td>👨‍🏫🏋️ Kontext verstehen und erweitern I</td></tr>
+            <tr><td>10:00 - 10:30</td><td>👨‍🏫🏋️ Kontext verstehen und erweitern I</td></tr>
 
             <tr><td>10:30 - 11:00</td><td>☕ Kaffeepause</td></tr>
 
-            <tr><td>10:00 - 10:15</td><td>👨‍🏫🏋️ Kontext verstehen und erweitern I</td></tr>
+            <tr><td>11:00 - 12:00</td><td>👨‍🏫🏋️ Kontext verstehen und erweitern II</td></tr>
+
+            <tr><td>12:00 - 12:30</td><td>👨‍🏫🏋️ Agenten und Subagenten in OpenCode</td></tr>
 
             <tr><td>12:30 - 13:30</td><td>🍽️ Mittagspause</td></tr>
 
@@ -46,9 +48,15 @@
             <tr><td>15:00 - 15:30</td><td>☕ Kaffeepause</td></tr>
 
             <tr><td>15:30 - 16:30</td><td>👨‍🏫🏋️ Dein maßgeschneiderter KI-Agent</td></tr>
-            <tr><td>16:30 - 17:00</td><td>👨‍🏫 Sicherer Einsatz von OpenCode, Abschlussrunde und Feedback</td></tr>
+            <tr><td>16:30 - 16:40</td><td>👨‍🏫 Sicher OpenCode einsetzen</td></tr>
+            <tr><td>16:40 - 17:00</td><td>👨‍🏫 Abschlussrunde und Feedback</td></tr>
           </tbody>
         </table>
+      </section>
+      <section>
+        <section>
+          <h2>Vorstellung und Begrüßung</h2>
+        </section>
       </section>
       <section>
         <section>
@@ -105,86 +113,16 @@
             <li class="fragment">eine Aufgabe, eine Session</li>
           </ul>
         </section>
-        <section>
-          <h2>Subagenten kennenlernen</h2>
-          <ul>
-            <li class="fragment"><code>explore</code> Subagent erkundet</li>
-            <li class="fragment"><code>general</code> Subagent für allgemeine Aufgaben</li>
-            <li class="fragment">Nur Ergebnis landet in Session</li>
-          </ul>
-        </section>
-
       </section>
       <section>
         <section>
-          <h2>Features planen, umsetzen und testen</h2>
-        </section>
-        <section>
-          <h2>Mit Spezifikation und KI umsetzen</h2>
-          <img class="fragment" src="./themes/spec-flow.png" />
-        </section>
-        <section>
-          <h2>3 Ansätze zum Entwickeln <br /> mit Spezifikationen und KI</h2>
-          <ol>
-            <li class="fragment">Plan/Build im Tool (IDE/Terminal) ✨</li>
-            <li class="fragment">extra Tools wie <a href="https://github.github.com/spec-kit/">Github SpecKit</a></li>
-            <li class="fragment">MCP wie <a href="https://codemcp.github.io/workflows/">Responsible Vibe MCP</a></li>
-          </ol>
-        </section>
-        <section>
-          <h2>Spezifikation vs. Anforderung</h2>
-          <ul>
-            <li class=" fragment">Anforderung für Menschen</li>
-            <li class="fragment">Spezifikation für KI-Agenten</li>
-            <li class="fragment">Code Referenzen, Beispiele</li>
-            <li class="fragment">Prompt oder Markdown Format</li>
-            </ul>
-        </section>
-        <section>
-          <h2>Spezifikation für Frontend</h2>
-          <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
-# Feature: Push einer einzelnen Police kann manuell ausgelöst werden
-
-Füge einen Button auf der Policen-Seite hinzu, um diese einzelne Police 
-an den Schaden Service zu übertragen. 
-
-Der Policen-Push kann mit einer Policen-Nummer (z.B. AXG0F) 
-ausgelöst werden und gibt HTTP-Status 200 zurück, wenn erfolgreich. 
-
-Bei erfolgreichem Push wird der Benutzer mit einer 
-Growl-Benachrichtigung informiert.
-
-## Request
-POST http://localhost:9090/api/v1/claim-info/policy/AXG0F/push
-
-## Response
-HTTP/1.1 200 
-
-[Response body is empty]
-
-Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
-  </code></pre>
-        </section>
-        <section>
-          <h2>Feature mit Plan/Build umsetzen</h2>
-          <ol>
-            <li class="fragment">📄 Feature Spezifikation erstellen</li>
-            <li class="fragment">📋 Planen der Umsetzung im <code>Plan</code> Modus</li>
-            <li class="fragment">👷‍♂️ Implementieren gemäß Plan im <code>Build</code> Modus</li>
-          </ol>
-        </section>
-        <section>
-          <h2>Großes Feature: Admin Bereich 🚧</h2>
-          <ul>
-            <li class="fragment">Verwalten der Produkte und Kategorien</li>
-            <li class="fragment">neue Admin Rolle</li>
-            <li class="fragment">Admin Bereich im Frontend</li>
-          </ul>
+          <h2>Erste Schritte mit OpenCode</h2>
+          <p>Übung</p>
         </section>
       </section>
       <section>
         <section>
-          <h2>Den Kontext mit MCP, Skills und Dateien erweitern</h2>
+          <h2>Kontext verstehen und erweitern I</h2>
         </section>
         <section>
           <h2>Das Context Window einer KI</h2>
@@ -285,6 +223,149 @@ Modell:    → liest Ergebnis & antwortet:
         </section>
         <section>
           <h2>Skills nutzen</h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>☕ Kaffeepause</h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Kontext verstehen und erweitern II</h2>
+          <p>Übung: MCP Server und Skills</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Agenten und Subagenten in OpenCode</h2>
+        </section>
+        <section>
+          <h2>Primary Agents und Subagenten</h2>
+          <table style="font-size: 60%;">
+            <tr class="cross-blue">
+              <th></th>
+              <th>🤖 Primary Agent</th>
+              <th>🕵️ Subagent</th>
+            </tr>
+            <tr class="fragment">
+              <td style="color: rgba(255, 255, 255, 0.4);">Beispiele</td>
+              <td><code>Build</code>, <code>Plan</code></td>
+              <td><code>explore</code>, <code>general</code></td>
+            </tr>
+            <tr class="fragment">
+              <td style="color: rgba(255, 255, 255, 0.4);">Aufruf</td>
+              <td>Du, Wechsel mit <code>Tab</code></td>
+              <td>Du mit <code>@</code> oder der Agent selbst</td>
+            </tr>
+            <tr class="fragment">
+              <td style="color: rgba(255, 255, 255, 0.4);">Aufgabe</td>
+              <td>Hauptgespräch in deiner Session</td>
+              <td>Teilaufgabe in eigener Unter-Session</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Subagenten kennenlernen</h2>
+          <ul>
+            <li class="fragment"><code>explore</code> Subagent erkundet</li>
+            <li class="fragment"><code>general</code> Subagent für allgemeine Aufgaben</li>
+            <li class="fragment">Aufruf mit <code>@</code> oder durch den Agenten selbst</li>
+            <li class="fragment">Nur Ergebnis landet in Session</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Warum Subagenten?</h2>
+          <ul>
+            <li class="fragment">eigener Kontext, eigene Session</li>
+            <li class="fragment">Haupt-Session bleibt klein (weniger Token)</li>
+            <li class="fragment">Erkunden und Umsetzen trennen</li>
+          </ul>
+        </section>
+        <section>
+          <h2>🏋️ Übung: Agenten ausprobieren</h2>
+          <ol>
+            <li class="fragment">Frage zum Winkelshop direkt in der Session stellen (z.B. "Wie wird der Warenkorb berechnet?")</li>
+            <li class="fragment">Dieselbe Frage mit <code>@explore</code> stellen, Session-Größe vergleichen</li>
+            <li class="fragment">Mit <code>@general</code> kleine Aufgabe delegieren (z.B. Unit Tests)</li>
+          </ol>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>🍽️ Mittagspause</h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Features planen, umsetzen und testen</h2>
+        </section>
+        <section>
+          <h2>Mit Spezifikation und KI umsetzen</h2>
+          <img class="fragment" src="./themes/spec-flow.png" />
+        </section>
+        <section>
+          <h2>3 Ansätze zum Entwickeln <br /> mit Spezifikationen und KI</h2>
+          <ol>
+            <li class="fragment">Plan/Build im Tool (IDE/Terminal) ✨</li>
+            <li class="fragment">extra Tools wie <a href="https://github.github.com/spec-kit/">Github SpecKit</a></li>
+            <li class="fragment">MCP wie <a href="https://codemcp.github.io/workflows/">Responsible Vibe MCP</a></li>
+          </ol>
+        </section>
+        <section>
+          <h2>Spezifikation vs. Anforderung</h2>
+          <ul>
+            <li class=" fragment">Anforderung für Menschen</li>
+            <li class="fragment">Spezifikation für KI-Agenten</li>
+            <li class="fragment">Code Referenzen, Beispiele</li>
+            <li class="fragment">Prompt oder Markdown Format</li>
+            </ul>
+        </section>
+        <section>
+          <h2>Spezifikation für Frontend</h2>
+          <pre><code data-trim data-noescape class="fragment language-md" style="font-size: 85%;">
+# Feature: Push einer einzelnen Police kann manuell ausgelöst werden
+
+Füge einen Button auf der Policen-Seite hinzu, um diese einzelne Police 
+an den Schaden Service zu übertragen. 
+
+Der Policen-Push kann mit einer Policen-Nummer (z.B. AXG0F) 
+ausgelöst werden und gibt HTTP-Status 200 zurück, wenn erfolgreich. 
+
+Bei erfolgreichem Push wird der Benutzer mit einer 
+Growl-Benachrichtigung informiert.
+
+## Request
+POST http://localhost:9090/api/v1/claim-info/policy/AXG0F/push
+
+## Response
+HTTP/1.1 200 
+
+[Response body is empty]
+
+Response code: 200; Time: 84ms (84 ms); Content length: 0 bytes (0 B)
+  </code></pre>
+        </section>
+        <section>
+          <h2>Feature mit Plan/Build umsetzen</h2>
+          <ol>
+            <li class="fragment">📄 Feature Spezifikation erstellen</li>
+            <li class="fragment">📋 Planen der Umsetzung im <code>Plan</code> Modus</li>
+            <li class="fragment">👷‍♂️ Implementieren gemäß Plan im <code>Build</code> Modus</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Großes Feature: Admin Bereich 🚧</h2>
+          <ul>
+            <li class="fragment">Verwalten der Produkte und Kategorien</li>
+            <li class="fragment">neue Admin Rolle</li>
+            <li class="fragment">Admin Bereich im Frontend</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>☕ Kaffeepause</h2>
         </section>
       </section>
       <section>
@@ -407,6 +488,11 @@ Modell:    → liest Ergebnis & antwortet:
             <p class="fragment">🧐 Agenten Berechtigungen prüfen und regeln</p>
             <p class="fragment">🏖️ Sandbox für Agent statt Vollzugriff (Docker )</p>
           </div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Abschlussrunde und Feedback</h2>
         </section>
       </section>
     </div>
