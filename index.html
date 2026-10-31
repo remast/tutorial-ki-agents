@@ -54,9 +54,6 @@
         </table>
       </section>
       <section>
-        <section>
-          <h2>Vorstellung und Begrüßung</h2>
-        </section>
           <section>
           <div class="grid grid-cols-2 gap-1 text-left">
             <div>
@@ -154,17 +151,38 @@
       <section>
         <section>
           <h2>🏋️ Erste Schritte mit OpenCode</h2>
-          <p>30 Minuten</p>
+          <p class="cross-yellow">30 Minuten</p>
         </section>
         <section>
           <h2>🏋️ Erste Schritte mit OpenCode <small class="cross-yellow">30 Min.</small></h2>
           <ol>
-            <li class="fragment">Projekt "Winkelshop" auschecken (<code>https://github.com/remast/winkelshop-playground</code>)</li>
-            <li class="fragment">OpenCode installieren und starten (in Projekt Ordner)</li>
-            <li class="fragment">LLM Provider mit OpenCode verbinden</li>
-            <li class="fragment">Mit ersten Prompts Code ändern und erkunden</li>
-            <li class="fragment">Mit Sessions arbeiten</li>
+            <li>Projekt "Winkelshop" auschecken (<code>https://github.com/remast/winkelshop-playground</code>)</li>
+            <li>OpenCode installieren und starten (in Projekt Ordner)</li>
+            <li>LLM Provider mit OpenCode verbinden</li>
+            <li>Mit ersten Prompts Code ändern und erkunden</li>
+            <li>Mit Sessions arbeiten</li>
           </ol>
+        </section>
+        <section>
+          <h2>🏋️ Erste Schritte mit OpenCode <small class="cross-yellow">30 Min.</small></h2>
+          <h4 class="cross-blue">Mit ersten Prompts Code ändern und erkunden</h4>
+          <ul style="font-size: 60%;">
+            <li>Wo wird der Preis des Warenkorbs berechnet?</li>
+            <li>Welches Framework wird für Unit Tests im Frontend verwendet?</li>
+            <li>Implementiere Unit Tests für shouldThrowExceptionWhenProductIsOutOfStock des @CartService</li>
+            <li>...</li>
+          </ul>
+          <p style="font-size: 60%;" class="cross-yellow">👉 Verschiedene LLM Modellel dabei nutzen.</p>
+        </section>
+        <section>
+          <h2>🏋️ Erste Schritte mit OpenCode <small class="cross-yellow">30 Min.</small></h2>
+          <h4 class="cross-blue">Sessions kennenlernen</h4>
+          <ul style="font-size: 60%;">
+            <li>Neue Session erstellen</li>
+            <li>Undo/Redo nutzen</li>
+            <li>Session wieder aufnehmen</li>
+            <li>...</li>
+          </ul>
         </section>
       </section>
       <section>
@@ -270,8 +288,36 @@ Modell:    → liest Ergebnis & antwortet:
         </section>
         <section>
           <h2>Skills nutzen</h2>
+          <ul>
+            <li>Agent lädt Skills selbständig bei Bedarf</li>
+            <li>Explizite Angabe in Prompt (z.B. "Nutze den Angular Developer" Skill)</li>
+          </ul>
         </section>
       </section>
+      <section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern I</h2>
+          <p class="cross-yellow">15 Minuten</p>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern I <small class="cross-yellow">15 Min.</small></h2>
+          <ol>
+            <li>Mit AGENTS.md vertraut machen</li>
+            <li>Erstellen der AGENTS.md mit <code>/init</code></li>
+            <li>Vergleich mit/ohne AGENTS.md</li>
+            <li>Inspiration aus OpenSource Projekten</li>
+          </ol>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern I <small class="cross-yellow">15 Min.</small></h2>
+          <h4 class="cross-blue">Inspiration aus OpenSource Projekten</h4>
+          <ul style="font-size: 60%;">
+            <li><a href="https://github.com/angular/angular/blob/main/AGENTS.md">Angular AGENTS.md</a></li>
+            <li><a href="https://github.com/spring-projects/spring-framework/blob/main/AGENTS.md">Spring AGENTS.md</a></li>
+          </ul>
+        </section>        
+      </section>
+
       <section>
         <section>
           <h2>☕ Kaffeepause</h2>
@@ -279,8 +325,100 @@ Modell:    → liest Ergebnis & antwortet:
       </section>
       <section>
         <section>
-          <h2>Kontext verstehen und erweitern II</h2>
-          <p>Übung: MCP Server und Skills</p>
+          <h2>🏋️ Kontext verstehen und erweitern II</h2>
+          <p class="cross-yellow">45 Minuten</p>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <ol>
+            <li>MCP Server Angular, Chrome nutzen</li>
+            <li>MCP Server für Postgres DB nutzen</li>
+            <li>Skill Angular Developer nutzen</li>
+            <li>Prompts mit MCP Servern und Skills nutzen</li>
+          </ol>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <h4 class="cross-blue">MCP Server Angular, Chrome nutzen</h4>
+          <pre><code data-trim data-noescape style="font-size: 85%;">
+   "angular-cli": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@angular/cli",
+        "mcp"
+      ]
+    },            
+          </code></pre>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <h4 class="cross-blue">MCP Server Angular, Chrome nutzen</h4>
+          <pre><code data-trim data-noescape style="font-size: 85%;">
+    "chrome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--no-usage-statistics"
+      ]
+    }   
+          </code></pre>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <h4 class="cross-blue">MCP Server für Postgres DB nutzen</h4>
+          <pre><code data-trim data-noescape style="font-size: 65%;">
+    "postgres": {
+      "type": "local",
+      "environment": {
+        "DATABASE_URI": "postgresql://neondb_owner:npg_gDvnok80zmsr@ep-empty-brook-algexyd6-pooler.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+      },
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ]
+    }       
+          </code></pre>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <h4 class="cross-blue">MCP Server für Postgres DB nutzen</h4>
+          <pre><code data-trim data-noescape style="font-size: 65%;">
+    "postgres": {
+      "type": "local",
+      "environment": {
+        "DATABASE_URI": "postgresql://winkelshop:harry123@localhost:5432/winkelshop"
+      },
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ]
+    }       
+          </code></pre>
+        </section>
+        <section>
+          <h2>🏋️ Kontext verstehen und erweitern II <small class="cross-yellow">45 Min.</small></h2>
+          <h4 class="cross-blue">Skill Angular Developer nutzen</h4>
+          <ul>
+            <li>Skill "angular-developer" von <a href="https://www.skills.sh/">Skills.sh</a> einbinden</li>
+            <li>Inhalt des Skills prüfen</li>
+            <li>Änderungen im Frontend mit Skill prompten</li>
+          </ul>
         </section>
       </section>
       <section>
@@ -318,14 +456,14 @@ Modell:    → liest Ergebnis & antwortet:
             <li class="fragment"><code>explore</code> Subagent erkundet</li>
             <li class="fragment"><code>general</code> Subagent für allgemeine Aufgaben</li>
             <li class="fragment">Aufruf mit <code>@</code> oder durch den Agenten selbst</li>
-            <li class="fragment">Nur Ergebnis landet in Session</li>
+            <li class="fragment">Ergebnis kommt zurück in die Haupt-Session</li>
           </ul>
         </section>
         <section>
           <h2>Warum Subagenten?</h2>
           <ul>
-            <li class="fragment">eigener Kontext, eigene Session</li>
-            <li class="fragment">Haupt-Session bleibt klein (weniger Token)</li>
+            <li class="fragment">Arbeit läuft in eigener Child-Session</li>
+            <li class="fragment">Haupt-Session bleibt übersichtlich</li>
             <li class="fragment">Erkunden und Umsetzen trennen</li>
           </ul>
         </section>
